@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Nosework Run Board — Interactive Demo v13.1</title>
+<style>
+:root{--navy:#11283b;--navy2:#223e53;--ink:#172e3c;--muted:#596f7b;--line:#d8e4e7;--bg:#f4f7f8;--paper:#fff;--teal:#087b6c;--mint:#e2f5ef;--amber:#a35e10;--cream:#fff5e7;--rose:#ad4340;--pale:#fff0ef;--shadow:0 5px 20px #183c5210}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}h1,h2,h3,p{margin:0}button,select,input,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);font-weight:690;padding:10px 13px;min-height:40px}button:hover:not(:disabled){filter:brightness(.975)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #44cbb9;outline-offset:2px}button:disabled{opacity:.35;cursor:not-allowed}button.primary{background:var(--teal);border-color:var(--teal);color:white}button.dark{background:var(--navy2);border-color:var(--navy2);color:white}button.warn{background:var(--cream);border-color:#e9c798;color:#84500c}button.soft{background:#edf3f5}button.sm{padding:6px 9px;font-size:12px;min-height:32px}select,input{background:#fff;border:1px solid #cbdbdf;padding:10px;border-radius:9px;min-width:0;color:var(--ink)}select{width:100%}input[type=checkbox]{accent-color:var(--teal);width:19px;height:19px;padding:0}label{display:block;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.02em;margin-bottom:5px}.wrap{max-width:1200px;margin:0 auto;padding:20px 18px 48px}.header{background:var(--navy);color:#fff}.head-inner{max-width:1200px;margin:auto;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.identity{display:flex;align-items:center;gap:12px}.mark{height:42px;width:42px;border-radius:13px;background:#38c5aa;color:#063d33;display:grid;place-items:center;font-size:26px;font-weight:900}.identity b{font-size:17px;display:block}.identity small{font-size:10px;color:#a9c9d5;letter-spacing:.15em}.demo-badge{border:1px solid #6b8794;color:#effbfb;padding:6px 10px;border-radius:30px;font-size:11px;font-weight:850;letter-spacing:.02em}.eyebrow{color:var(--teal);font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.hero{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;margin:0 0 15px}.hero h1{font-size:clamp(23px,4vw,32px);letter-spacing:-.7px;line-height:1.16;margin:5px 0}.hero p{color:var(--muted);max-width:680px}.status-pill{display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:#0b6a5a;border:1px solid #bce1d6;border-radius:30px;padding:9px 12px;font-size:12px;font-weight:800;white-space:nowrap}.status-pill.hold{background:var(--cream);border-color:#edca98;color:#875213}.dot{width:8px;height:8px;border-radius:50%;background:currentColor}.notice{border:1px solid #dfcf9b;background:#fffaeb;padding:11px 14px;border-radius:11px;color:#6b541f;font-size:13px;margin-bottom:15px}.notice strong{font-weight:850}.mainnav{display:flex;gap:6px;overflow:auto;margin:0 0 18px;border-bottom:1px solid var(--line);padding-bottom:8px}.mainnav button{white-space:nowrap;background:transparent;border:1px solid transparent;font-weight:800;color:#56707d}.mainnav button.active{background:var(--navy2);color:#fff;border-color:var(--navy2)}.cols{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(290px,.84fr);gap:15px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.panel h2{font-size:18px;letter-spacing:-.3px}.panel h3{font-size:15px}.muted{color:var(--muted)}.small{font-size:12px}.sectionhead{display:flex;justify-content:space-between;align-items:start;gap:8px;margin-bottom:14px}.sectionhead p{color:var(--muted);font-size:13px;margin-top:4px}.subtle{border-radius:12px;background:#f5f9fa;border:1px solid #e3edef;padding:12px}.dog-select{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:9px}.dog-select select{font-weight:700}.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.status-card{border:1px solid var(--line);border-radius:13px;padding:13px;position:relative;overflow:hidden}.status-card:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:#7da3ad}.status-card.wait:before{background:#a3b5bb}.status-card.near:before{background:#e0a346}.status-card.next:before{background:#18a18b}.status-card.done:before{background:#83959b}.status-card.drop:before{background:var(--rose)}.status-card h3{margin-bottom:10px;min-height:39px}.bigmetric{font-size:32px;line-height:1;letter-spacing:-1px;font-weight:850}.status-name{font-size:14px;font-weight:850;margin-top:7px}.status-detail{color:var(--muted);font-size:12px;margin-top:5px}.cardtag{font-size:10px;letter-spacing:.03em;font-weight:800;text-transform:uppercase;margin-top:10px;color:#6b7e83}.steps{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.tag{display:inline-block;background:#eaf1f3;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:750;color:#3e5e6d}.tag.urgent{background:#e5f6ef;color:#106c5e}.tag.warn{background:#fff1da;color:#925c17}.sms-sim{background:#e9f0f2;padding:11px;border-radius:18px;border:1px solid #d1e0e5}.phone{border:4px solid #243d4a;border-radius:28px;background:#f9fbfb;overflow:hidden;box-shadow:0 8px 25px #102f4c16;max-width:440px;margin:0 auto}.phone-top{background:white;padding:13px 15px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}.avatar{width:35px;height:35px;border-radius:50%;background:#d7ede9;color:#086d5d;display:grid;place-items:center;font-size:20px;font-weight:800}.phone-top strong{font-size:13px;display:block}.phone-top small{font-size:10px;color:var(--muted)}.messages{height:280px;overflow-y:auto;padding:13px 10px;display:flex;flex-direction:column;gap:9px;scrollbar-width:thin}.bubble{border-radius:14px;padding:10px 12px;max-width:90%;font-size:13px;white-space:pre-line;overflow-wrap:anywhere}.bubble.in{align-self:flex-start;background:#fff;border:1px solid #e0e8eb;border-bottom-left-radius:4px}.bubble.out{align-self:flex-end;background:#d7f6de;border:1px solid #b7e4c2;border-bottom-right-radius:4px}.bubble .when{display:block;text-align:right;color:#71847f;font-size:10px;margin-top:7px}.empty-chat{color:var(--muted);text-align:center;margin:auto;max-width:230px;font-size:12px}.chat-send{display:flex;gap:6px;align-items:center;padding:10px;background:white;border-top:1px solid var(--line)}.chat-send input{width:100%;border-radius:25px;padding:10px 14px;font-size:13px}.chat-send button{border-radius:50%;height:38px;min-height:38px;width:38px;padding:0;display:grid;place-items:center}.quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.quick button{padding:6px 10px;min-height:33px;font-size:11px}.sms-mock{font-size:11px;color:#687b84;text-align:center;padding:6px 0 0}.check{display:flex;gap:9px;align-items:start;background:#f4f9f7;padding:11px;border-radius:11px;border:1px solid #d4e9df}.check label{margin:0;color:var(--ink);font-size:13px;letter-spacing:0;font-weight:700}.check p{font-size:11px;color:var(--muted);margin-top:3px}.board-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.search-board{border:1px solid var(--line);border-radius:14px;background:white;overflow:hidden}.search-board .top{padding:14px 14px 10px;border-top:5px solid #00897a}.search-board .top h3{font-size:15px;min-height:43px}.search-board .meta{color:var(--muted);font-size:12px;margin-top:5px}.last{background:#eff6f7;padding:13px 14px}.tiny{font-size:10px;letter-spacing:.07em;color:#657b88;font-weight:850;text-transform:uppercase}.last strong{font-size:20px;display:block;margin:4px 0}.nextline{display:flex;gap:9px;align-items:center;margin:10px 14px}.runnum{font-size:13px;font-weight:850;padding:9px 6px;background:#e9f0f3;border-radius:8px;min-width:39px;text-align:center}.deck{padding:10px 14px}.deckhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.deck-row{display:flex;gap:7px;align-items:center;border-bottom:1px solid #ecf0f1;padding:6px 0;font-size:12px}.deck-row:last-child{border-bottom:0}.deck-row.mine{background:#def4ea;margin-left:-4px;margin-right:-4px;padding:6px 4px;border-radius:7px;font-weight:800}.index{font-weight:850;color:#5a717d;width:15px}.board-actions{border-top:1px solid var(--line);padding:11px 13px;display:flex;gap:7px;flex-wrap:wrap}.board-actions button{flex:1;font-size:12px;min-width:83px}.skip-control{display:flex;align-items:center;gap:5px;flex:1 0 123px}.skip-control label{font-size:11px;margin:0;letter-spacing:0;white-space:nowrap}.skip-control input{width:50px;min-width:0;min-height:40px;padding:8px 4px;text-align:center}.skip-control button{flex:1;min-width:53px}.inline-controls{border-top:1px solid var(--line);margin-top:8px;padding-top:10px;display:grid;gap:8px}.inline-controls .selectrow{display:flex;gap:8px}.inline-controls .selectrow select{flex:1;min-width:0}.banner-hold{background:var(--cream);border:1px solid #e6cb9c;border-radius:12px;color:#7d5217;padding:12px 14px;margin:0 0 15px;display:flex;align-items:center;justify-content:space-between;gap:12px}.banner-hold strong{font-weight:800}.admin-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metricbox{border:1px solid var(--line);border-radius:13px;padding:15px}.metricbox strong{font-size:27px;display:block}.metricbox span{font-size:12px;color:var(--muted)}.log{border:1px solid var(--line);border-radius:12px;padding:10px;max-height:300px;overflow:auto}.logentry{font-size:12px;border-bottom:1px solid #e9eff0;padding:8px 4px}.logentry:last-child{border-bottom:0}.logentry small{color:var(--muted)}.helpgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.footer{color:#647986;font-size:12px;margin-top:25px;text-align:center}.sr-only{position:absolute;height:1px;width:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:980px){.board-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.status-grid{grid-template-columns:1fr}.status-card h3{min-height:0}.cols{grid-template-columns:1fr 380px}}
+@media(max-width:730px){.wrap{padding:16px 11px 35px}.head-inner{padding:12px}.demo-badge{font-size:10px}.hero{grid-template-columns:1fr}.status-grid,.board-grid,.cols,.helpgrid,.admin-cards{grid-template-columns:1fr}.status-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:3px 14px}.status-card h3{grid-column:1/-1;margin-bottom:4px}.bigmetric{grid-column:2;grid-row:2/4;text-align:right}.status-name{grid-column:1;grid-row:2;margin-top:0}.status-detail{grid-column:1;grid-row:3;margin-top:0}.cardtag{grid-column:1/-1}.hero h1{font-size:26px}.panel{padding:14px}.messages{height:275px}.sectionhead{flex-wrap:wrap}.dog-select{grid-template-columns:1fr}.mainnav button{font-size:13px;padding:9px}.search-board .top h3{min-height:0}}
+
+.trialbar{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:4px 0 16px;padding:12px;background:#e9f0f2;border:1px solid #d5e3e6;border-radius:13px}.trialbar .field{flex:1 1 235px}.trialbar button{flex:0 0 auto}.setup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.settings-col{display:grid;gap:10px;margin-top:12px}.settings-col input,.settings-col textarea,.settings-col select{width:100%}textarea{background:white;border:1px solid #cbdbdf;border-radius:9px;padding:10px;width:100%;resize:vertical}.formrow{display:flex;align-items:end;gap:8px;flex-wrap:wrap}.formrow>div{flex:1 1 125px;min-width:0}.formrow>button{flex:0 0 auto}.settings-col label{margin-bottom:4px}.setup-searches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.setup-search{border:1px solid var(--line);background:#fbfcfd;border-radius:13px;padding:15px}.on-deck-control{display:flex;align-items:center;justify-content:space-between;gap:9px;border-top:1px solid var(--line);padding-top:10px}.on-deck-control .steps{margin:0;align-items:center}.on-deck-control .steps b{min-width:18px;text-align:center}.filelabel{display:inline-flex;align-items:center;border:1px solid #cbdbdf;border-radius:9px;padding:10px 13px;margin:0;font-size:14px;font-weight:750;letter-spacing:0;color:var(--ink);cursor:pointer;background:#fff;min-height:40px}.hidden-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.roster-peek{display:flex;gap:5px;flex-wrap:wrap} .setup-search .steps{margin:2px 0 0}
+@media(max-width:860px){.setup-grid,.setup-searches{grid-template-columns:1fr}}@media(max-width:520px){.trialbar{padding:10px;gap:8px}.trialbar .field{flex-basis:100%}.trialbar button{width:100%}.formrow>button{flex:1 1 100%}.setup-searches{grid-template-columns:1fr}.panel{padding:14px}.on-deck-control{align-items:flex-start}.setup-search .steps button{flex:1 1 46%}}.settings-col input.hidden-file{width:1px;height:1px;max-width:1px;padding:0;min-width:1px;position:absolute;opacity:0;pointer-events:none}
+
+/* Accessibility: high-contrast themes, legible status text and large touch targets. */
+.view-settings{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin:-7px 0 16px}.view-settings .field{min-width:185px;flex:1 1 190px;max-width:350px}.trialbar .field{flex:1 1 210px}.admin-subnav{display:flex;gap:8px;flex-wrap:wrap;margin:-5px 0 15px}.event-settings{margin-bottom:14px}.event-settings .formrow{margin-top:12px}.schedule-day{margin-top:13px;border:2px solid var(--line);padding:12px;border-radius:10px}.schedule-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.schedule-row:first-of-type{margin-top:8px}.schedule-row button{flex-shrink:0}select,input,textarea{border-width:2px}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid #f5ab15;outline-offset:2px}
+/* Bright-sunlight mode: plain black text on white panels, cobalt actionable buttons, strong yellow focus. */
+body[data-theme="outdoor"]{--bg:#fff;--paper:#fff;--navy:#000;--navy2:#003c78;--ink:#070707;--muted:#303030;--teal:#004e9a;--line:#282828;--mint:#dcf3df;--cream:#ffe7ac;--shadow:none;font-size:17px;line-height:1.55}
+body[data-theme="outdoor"] .header{background:#000;color:#fff}body[data-theme="outdoor"] .identity small,body[data-theme="outdoor"] .demo-badge{color:#fff}body[data-theme="outdoor"] .mark{background:#ffea00;color:#000}body[data-theme="outdoor"] .hero p,body[data-theme="outdoor"] .muted,body[data-theme="outdoor"] .sectionhead p,body[data-theme="outdoor"] label{color:#303030}body[data-theme="outdoor"] .eyebrow{color:#003d7a}body[data-theme="outdoor"] .trialbar,body[data-theme="outdoor"] .subtle,body[data-theme="outdoor"] .sms-sim{background:#fff;border:2px solid #111}body[data-theme="outdoor"] .panel,body[data-theme="outdoor"] .search-board,body[data-theme="outdoor"] .status-card{border:2px solid #111;box-shadow:none}body[data-theme="outdoor"] .mainnav button{color:#111;border:2px solid #333}body[data-theme="outdoor"] .mainnav button.active,body[data-theme="outdoor"] button.primary{background:#003c78;color:#fff;border:2px solid #003c78}body[data-theme="outdoor"] button,body[data-theme="outdoor"] input,body[data-theme="outdoor"] select,body[data-theme="outdoor"] textarea{min-height:48px;font-size:16px;border:2px solid #222}body[data-theme="outdoor"] .bigmetric{font-size:44px}body[data-theme="outdoor"] .status-detail,body[data-theme="outdoor"] .cardtag,body[data-theme="outdoor"] .small,body[data-theme="outdoor"] .tiny{font-size:13px;color:#252525}body[data-theme="outdoor"] .last,body[data-theme="outdoor"] .runnum,body[data-theme="outdoor"] .status-card,body[data-theme="outdoor"] .tag{background:#fff;color:#000}body[data-theme="outdoor"] .status-card.next{background:#e8fff2;border:3px solid #00581e}body[data-theme="outdoor"] .status-card.near{background:#fff5d4;border:3px solid #9d5500}body[data-theme="outdoor"] .status-card.drop{background:#fff0f0;border:3px solid #990000}body[data-theme="outdoor"] .notice{color:#111;background:#fff4c2;border:2px solid #101010;font-size:14px}body[data-theme="outdoor"] .bubble.in{border:2px solid #111}body[data-theme="outdoor"] .bubble.out{border:2px solid #005c24;background:#e5ffea}body[data-theme="outdoor"] .bubble .when{color:#333}body[data-theme="outdoor"] .status-pill{color:#063d20;border:2px solid #025324}body[data-theme="outdoor"] .status-pill.hold,body[data-theme="outdoor"] .banner-hold{color:#111;background:#ffe27a;border:2px solid #111}body[data-theme="outdoor"] .phone{border:4px solid #000}body[data-theme="outdoor"] .search-board .top{border-top:7px solid #005da8}body[data-theme="outdoor"] .tag.urgent{background:#e5ffef;color:#00461c;border:1px solid #00461c}body[data-theme="outdoor"] .tag.warn{background:#ffe8b8;color:#4e2b00;border:1px solid #6e3900}
+@media(max-width:580px){.view-settings .field{max-width:none}.trialbar .field{flex-basis:100%}.schedule-row{flex-wrap:wrap}.schedule-row button{width:100%}}
+.role-switcher{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#eaf2f4;border:2px solid #b5ced5;border-radius:13px;padding:12px 14px;margin:0 0 14px}.switch-label{display:flex;flex-direction:column;gap:2px}.switch-label b{font-size:15px}.switch-label span{font-size:12px;color:var(--muted)}.role-buttons{display:flex;flex-wrap:wrap;gap:7px}.role-buttons button{min-height:44px;padding:9px 14px}.role-buttons button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #fff4}body[data-theme="outdoor"] .role-switcher{background:#fff;border:2px solid #111}body[data-theme="outdoor"] .switch-label span{color:#222}@media(max-width:590px){.role-buttons{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.role-buttons button{padding:9px 5px;font-size:12px;white-space:normal;line-height:1.25}.role-switcher{padding:10px}}
+
+/* v4 administration: focused pages, restrained hierarchy and mobile-first controls. */
+.admin-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.admin-header h2{font-size:22px;letter-spacing:-.3px;margin:3px 0}
+.admin-header p{font-size:13px;color:var(--muted)}
+.admin-context,.admin-count{font-size:12px;color:var(--muted);font-weight:650}
+.admin-context{background:#e7f1f3;border:1px solid var(--line);border-radius:9px;padding:6px 10px;white-space:nowrap}
+.admin-pages{display:flex;overflow-x:auto;gap:7px;scrollbar-width:thin;padding-bottom:9px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.admin-pages button{flex:0 0 auto;white-space:nowrap;border:1px solid var(--line);border-radius:10px;background:#fff;min-height:44px;font-weight:700;padding:10px 14px}
+.admin-pages button.selected{background:var(--navy2);color:#fff;border-color:var(--navy2)}
+.admin-overview{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:14px}
+.admin-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:15px}
+.admin-summary .metricbox{padding:13px}.admin-summary .metricbox strong{font-size:30px;line-height:1.15}
+.admin-summary .metricbox strong span{font-size:13px;font-weight:600;color:var(--muted)}
+.admin-summary .metricbox small{display:block;font-size:12px;line-height:1.3;color:var(--muted);margin-top:6px}
+.admin-hold{background:#f1f8f5;border:1px solid #c8e7da;border-radius:11px;padding:13px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.admin-hold.is-hold{background:var(--cream);border-color:#e6cb9c}
+.admin-hold p{font-size:12px;color:var(--muted);margin-top:4px}
+.admin-quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.admin-quick button{flex:0 1 auto}
+.admin-intro{margin:7px 0 14px;line-height:1.5}
+.admin-dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.admin-dual > .panel{min-height:100%}.admin-dual .panel h3{font-size:17px}
+.admin-block-gap{margin-top:14px}.admin-divider{border-top:1px solid var(--line);margin:6px 0}
+.admin-date-fields{display:grid;grid-template-columns:1fr minmax(155px,.7fr);gap:9px}
+.admin-add-team{display:grid;grid-template-columns:100px 1fr 1fr;gap:9px}
+.admin-date-fields input,.admin-add-team input{width:100%}
+.admin-align{align-self:flex-start}
+.admin-footnote{font-size:12px;color:var(--muted);margin:14px 3px 0}
+.admin-search-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.admin-search-card{border:1px solid var(--line);border-radius:12px;background:#fbfcfd;padding:15px}
+.admin-search-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+.admin-search-heading h3{font-size:16px}.admin-status{color:#5a626d;border:1px solid #cbd6d9;border-radius:20px;background:#eef2f3;padding:3px 9px;font-size:11px;font-weight:750}
+.admin-status.is-active{color:#076653;border-color:#a9ded1;background:#e7f8f0}
+.admin-search-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:14px 0}
+.admin-search-fields input,.admin-search-fields select{width:100%}
+.admin-search-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.admin-low-actions{display:flex;flex-wrap:wrap;gap:7px}
+button.danger-light{color:#842f2e;background:#fff5f4;border:1px solid #d6a9a6}
+.roster-table-wrap{overflow:auto;max-height:430px;border:1px solid var(--line);border-radius:10px;margin-top:12px}
+.roster-table{border-collapse:collapse;width:100%;font-size:14px}
+.roster-table th{font-size:12px;text-align:left;background:#eff5f6;position:sticky;top:0;color:#3a5563}
+.roster-table th,.roster-table td{padding:9px 12px;border-bottom:1px solid var(--line)}
+.roster-table tbody tr:last-child td{border-bottom:0}
+.admin-more{margin-top:11px}.admin-selected{display:flex;flex-direction:column;gap:3px;background:#f1f6f8;border-radius:10px;padding:12px;margin:12px 0}
+.admin-selected span{font-size:12px;color:var(--muted)}
+body[data-theme="outdoor"] .admin-pages button.selected{background:#003c78;color:#fff}
+body[data-theme="outdoor"] .admin-search-card,body[data-theme="outdoor"] .admin-context,body[data-theme="outdoor"] .admin-selected{background:#fff;border:2px solid #111}
+body[data-theme="outdoor"] .admin-hold{border:2px solid #111}
+body[data-theme="outdoor"] button.danger-light{background:#fff3ee;color:#850b00;border:2px solid #850b00}
+body[data-theme="outdoor"] .admin-status.is-active{color:#004b29;background:#ebfff4;border-color:#004b29}
+@media(max-width:900px){.admin-overview,.admin-dual,.admin-search-grid{grid-template-columns:1fr}}
+@media(max-width:550px){.admin-header{align-items:flex-start}.admin-context{font-size:11px}.admin-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.admin-summary .metricbox{padding:9px 7px}.admin-summary .metricbox strong{font-size:22px}.admin-summary .metricbox small{font-size:10px}.admin-search-fields{grid-template-columns:1fr}.admin-search-actions>button{width:100%}.admin-low-actions{width:100%}.admin-low-actions button{flex:1}.admin-add-team{grid-template-columns:90px 1fr}.admin-add-team>div:last-child{grid-column:1/-1}.admin-date-fields{grid-template-columns:1fr}.admin-hold{flex-wrap:wrap}.admin-hold button{width:100%}.admin-quick button{flex:1 1 130px}.admin-pages{margin-right:-3px}}
+
+@media(max-width:550px){
+ .admin-pages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:7px}
+ .admin-pages button{white-space:normal;padding:8px 9px;min-width:0}
+ .admin-pages button:last-child{grid-column:1/-1}
+}
+/* v6 hierarchy and drill-down list enhancements */
+.admin-flow{display:grid;gap:14px}.admin-step-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.admin-step-title h3{font-size:18px}.admin-choice-list{display:grid;gap:7px;margin:12px 0}.admin-choice{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);padding:12px 13px}.admin-choice.selected{background:#e5f6ef;border:2px solid var(--teal)}.admin-choice strong,.admin-choice small{display:block}.admin-choice small{color:var(--muted);font-weight:500;margin-top:3px}.admin-choice svg{flex:0 0 auto}.admin-create-form{background:#f1f7f8;border-radius:12px;padding:14px;margin-top:13px}.admin-create-form h4{margin-bottom:10px}.admin-create-form .admin-create-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.admin-create-form .admin-create-fields>div:first-child{grid-column:span 3}.admin-create-form button{margin-top:12px}.admin-run-type{font-size:12px;color:#255947;font-weight:700}.admin-locked{display:block;padding:10px;border:1px solid #cadfe0;background:#f2f8f7;border-radius:9px;min-height:43px}.admin-template-note{margin-top:10px;padding:10px;border-radius:10px;background:#eaf5f2;font-size:12px}.admin-inline-fields{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-top:9px}.admin-choice.selected small{color:#34574a}
+@media(max-width:550px){.admin-create-form .admin-create-fields{grid-template-columns:1fr}.admin-create-form .admin-create-fields>div:first-child{grid-column:auto}.admin-inline-fields{grid-template-columns:1fr}}
+/* v5 hierarchy, run editing and roster entry editing */
+.admin-breadcrumb{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.admin-breadcrumb span{font-size:11px;border:1px solid var(--line);border-radius:8px;background:#f0f5f6;padding:5px 8px;font-weight:650;overflow-wrap:anywhere}
+.admin-run-list{display:grid;gap:7px;margin:12px 0}.run-list-row{border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px}.run-list-row span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.run-list-row button{flex-shrink:0}
+.admin-edit-team{background:#f0f7f6;border:1px solid #bdd8d0;border-radius:12px;padding:14px;margin-top:12px}.admin-edit-team h3{margin-bottom:5px}.admin-edit-team .admin-add-team{margin:12px 0}
+body[data-theme="outdoor"] .admin-breadcrumb span,body[data-theme="outdoor"] .admin-edit-team,body[data-theme="outdoor"] .run-list-row{border:2px solid #111;background:#fff}
+@media(max-width:550px){.run-list-row{align-items:flex-start}.run-list-row button{min-height:44px}.admin-breadcrumb span{width:100%}}
+
+
+/* v10: streamlined Administrator overview activation and optional pair setup */
+.run-activation-panel{border:1px solid #c7dedb;border-radius:14px;background:#f3faf8;padding:17px;margin-bottom:19px}
+.run-activation-panel h3{font-size:18px}
+.activation-summary{font-size:12px;color:var(--muted);font-weight:700;margin:8px 0 12px}
+.activation-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.activation-item{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid #d4e2e1;border-radius:10px;background:white;cursor:pointer;margin:0}
+.activation-item input{width:20px;height:20px;flex:none;accent-color:var(--teal)}
+.activation-item .activation-name{display:block;font-size:14px;font-weight:800;color:var(--ink);letter-spacing:0}
+.activation-item .activation-detail{display:block;font-size:11px;color:var(--muted);letter-spacing:0;margin-top:3px;font-weight:600}
+.activation-item:has(input:disabled){opacity:.65;cursor:not-allowed}
+.activation-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.activation-actions button{flex:1 1 140px}
+.pair-section{margin-top:16px;padding-top:16px;border-top:1px solid #b8d3ce}
+.pair-section .formrow{margin-top:11px}
+.run-activation-panel .run-list-row{background:#fff}
+body[data-theme="outdoor"] .run-activation-panel{background:#fff;border:2px solid #111}
+body[data-theme="outdoor"] .activation-item{border:2px solid #111}
+@media(max-width:650px){.activation-list{grid-template-columns:1fr}.run-activation-panel{padding:13px}}
+
+/* v10: high-visibility event deletion with two distinct confirmations */
+.event-delete-zone{margin-top:18px;padding:14px;background:#fff5f2;border:1px solid #e6b9b1;border-radius:12px}
+.event-delete-zone h4{color:#9c352e;margin:0 0 7px}
+.event-delete-zone .delete-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.event-delete-zone .delete-actions button{flex:1 1 175px}
+.event-delete-zone input{width:100%;margin-top:6px}
+.event-delete-zone .danger-light{color:#a8302c}
+/* v8: run names, gate-only focus, and parking-lot first staging */
+.admin-run-list .tag{margin-left:8px}.formrow{align-items:end}.formrow>div{flex:1;min-width:145px}
+@media(max-width:600px){.formrow{display:flex;flex-direction:column;align-items:stretch}.formrow>div{width:100%}}
+
+/* v8 steward stations */
+.station-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 16px}
+.station-tabs button{flex:1 1 150px;min-height:48px}
+.station-tabs button.selected{background:var(--navy2);color:#fff;border-color:var(--navy2)}
+.gate-focus{max-width:650px;margin:0 auto}.gate-focus .search-board .top h3{min-height:0}
+.parking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.staging-card{padding:18px;border:1px solid var(--line);background:#fff;border-radius:14px}
+.staging-card h3{margin:4px 0 8px;font-size:18px}
+.staging-dog{font-size:23px;font-weight:800;margin-top:9px;line-height:1.2}
+.staging-card button{width:100%;margin-top:14px}
+.station-selector{max-width:580px;margin:0 auto 14px}.station-selector select{width:100%;margin-top:6px}
+.staging-pair{margin-top:7px}
+@media(max-width:620px){.parking-grid{grid-template-columns:1fr}.staging-dog{font-size:21px}}
+/* v12 gate-driven staging + run completion */
+.staging-status{margin:12px 0;padding:11px;border-radius:11px;border:2px solid #a2d4bf;background:#effbf4}.staging-status.is-occupied{border-color:#d8bd89;background:#fff8e8}.staging-status .small{margin-top:4px}.staging-deck{margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:5px 12px}.staging-deck .deck-row{gap:10px}.run-list-row button:disabled{opacity:.45}
+
+/* v13.1: operational meaning is conveyed by text and color; phone controls first. */
+:root{--send-blue:#175fbd;--active-green:#17663e;--on-deck-amber:#9d580e;--hold-red:#a9272b;--done-green:#06482f}
+.status-card.next:before{background:var(--send-blue)}
+.status-card.near:before{background:var(--on-deck-amber)}
+.status-card.sent:before{background:var(--send-blue)}
+.status-card.done:before{background:var(--done-green)}
+.status-card.sent{background:#f1f7ff}.status-card.done{background:#ebf7ef}
+.status-card.near{background:#fffaf0}
+.run-status{display:inline-block;border-radius:7px;padding:2px 7px;font-weight:800;font-size:11px;border:1px solid currentColor;line-height:1.45}
+.run-status.status-active{color:var(--active-green);background:#e8f7ec}
+.run-status.status-complete{color:#485b63;background:#f1f4f5}
+.run-status.status-done{color:var(--done-green);background:#def1e5}
+.search-board .top{border-top-color:var(--active-green)}
+button.primary.send-action,button.send-action{background:var(--send-blue);border-color:var(--send-blue);color:white}
+.banner-hold,.status-pill.hold{background:#fff0ef;border-color:#bb4c50;color:#912025}
+.staging-card.is-active{border-left:4px solid var(--active-green)}
+.staging-card.is-complete{border-left:4px solid #687982}
+.staging-card.is-done{border-left:4px solid var(--done-green)}
+.staging-card.is-complete .staging-status{background:#f1f4f5;border-color:#87979d}
+.staging-card.is-done .staging-status{background:#e4f4e8;border-color:var(--done-green)}
+.staging-card .tiny{font-size:12px;letter-spacing:.02em}
+.staging-card .deck-row{font-size:14px;min-height:34px}
+.staging-card .staging-deck .runnum{font-size:13px}
+.staging-card p.small{font-size:13px}
+.context-toolbar{display:none;align-items:center;gap:8px;justify-content:space-between;border:1px solid var(--line);background:#ecf3f5;border-radius:10px;padding:8px 11px;margin-bottom:9px}
+.context-summary{min-width:0;flex:1;display:flex;flex-direction:column}
+.context-summary strong,.context-summary span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.context-summary strong{font-size:13px}.context-summary span{font-size:11px;color:var(--muted)}
+.context-health{font-size:11px;color:var(--active-green);font-weight:850;white-space:nowrap}
+.context-health.is-hold{color:var(--hold-red)}
+.context-controls{display:block}
+body[data-theme="outdoor"] .status-card.sent{background:#edf5ff;border:2px solid #004e9a}
+body[data-theme="outdoor"] .status-card.done{background:#e4ffeb;border:3px solid #00602b}
+body[data-theme="outdoor"] .status-card.near{background:#fff3cc;border:2px solid #7a4100}
+body[data-theme="outdoor"] .banner-hold,body[data-theme="outdoor"] .status-pill.hold{background:#ffe4e4;color:#800000;border:2px solid #800000}
+body[data-theme="outdoor"] button.primary.send-action,body[data-theme="outdoor"] button.send-action{background:#003c78;border-color:#003c78;color:white}
+body[data-theme="outdoor"] .context-toolbar{background:#fff;border:2px solid #111}
+@media(max-width:650px){
+ .head-inner{padding:5px 11px;gap:7px;flex-wrap:nowrap}
+ .identity{gap:7px;min-width:0}.mark{width:27px;height:27px;font-size:18px;border-radius:7px}
+ .identity b{font-size:14px;white-space:nowrap}.identity small{display:none}
+ .demo-badge{font-size:9px;letter-spacing:0;padding:3px 6px;white-space:nowrap}
+ .wrap{padding:8px 10px 28px}
+ .hero{display:none}.role-switcher{padding:5px;margin-bottom:7px;border-width:1px}
+ .switch-label{display:none}.role-buttons{width:100%;gap:5px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .role-buttons button{min-height:43px;padding:6px 8px;font-size:14px}
+ .context-toolbar{display:flex}.context-controls{display:none}.context-controls.is-open{display:block}
+ .context-controls .trialbar{padding:8px;margin:0 0 7px}.context-controls .view-settings{margin:0 0 8px}
+ .notice{margin:0 0 7px;padding:6px 9px;font-size:11px;line-height:1.3}
+ .mainnav{margin:0 0 9px;padding-bottom:6px;gap:4px}
+ .mainnav button{padding:7px 10px;min-height:41px;font-size:12px}
+ .station-tabs{margin:0 0 8px;gap:6px}.station-tabs button{min-height:44px;padding:7px}
+ .sectionhead{margin-bottom:7px}.sectionhead p{display:none}
+ .station-selector{margin-bottom:8px}.station-selector select{margin-top:2px}
+ .panel{padding:12px}.staging-card{padding:12px}
+ .staging-card .staging-dog{font-size:21px}
+ .staging-card button{min-height:46px}
+ .status-grid{gap:8px}.status-card{padding:11px}
+ .status-card h3{margin-bottom:5px}
+ .status-card .bigmetric{font-size:27px}
+ .admin-header{margin-bottom:7px}.admin-header p{display:none}
+ .admin-breadcrumb{margin-top:5px}.admin-breadcrumb span{width:auto;font-size:10px;padding:3px 5px}
+}
+@media(max-width:365px){.demo-badge{font-size:8px}.context-health{display:none}.identity b{font-size:13px}}
+</style>
+</head>
+<body>
+<header class="header"><div class="head-inner"><div class="identity"><div aria-hidden="true" class="mark">✦</div><div><b>Nosework Run Board</b><small>EVENTS · TRIALS · SMS</small></div></div><div class="demo-badge">VERSION 13.1 · OFFLINE DEMO</div></div></header>
+<main class="wrap" id="app"></main>
+<script>
+'use strict';
+// Everything in this file runs only in this browser tab. There are no network requests. v13.1 demo.
+const participants=[
+ ['Atlas','Morgan'],['Fern','Lee'],['Biscuit','Ava'],['Scout','Chris'],['Nova','Jordan'],['Pepper','Alex'],['Juniper','Sam'],['Maple','Casey'],['Echo','Robin'],['Blue','Dana'],['Willow','Reese'],['Rocket','Taylor'],['Wren','Jules'],['Cedar','Quinn'],['Pip','Jamie'],['Tye','Tomas'],['Louie','Pat'],['Moxie','Harper'],['Sage','Blake'],['Finn','Drew'],['Kona','Sky'],['Olive','Elliot'],['Banjo','Leslie'],['Roo','Avery'],['Ginger','Riley'],['Hazel','Parker'],['Tucker','Jess'],['Luna','Shawn'],['Lark','Peyton'],['Otis','Rory'],['Raven','Noel'],['Fable','Charlie'],['Juno','Remy'],['Ember','Bailey'],['Milo','Frankie'],['Indie','Emerson']
+];
+let roster=participants.map((p,i)=>({id:String(i+1),num:i+1,dog:p[0],handler:p[1]}));
+let teamIdSequence=0;
+function newTeamId(existing=roster){
+ const reserved=new Set(existing.map(t=>String(t.id)));
+ let id;
+ do{id=`team-${Date.now().toString(36)}-${++teamIdSequence}`;}while(reserved.has(id));
+ return id;
+}
+const byId=id=>roster.find(d=>d.id===String(id));
+const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const label=id=>{const d=byId(id);return d?`${escapeHTML(d.dog)} <span class="muted">· ${escapeHTML(d.handler)}</span>`:'—'};
+const plain=id=>{const d=byId(id);return d?`#${d.num} ${d.dog}`:'#?'};
+const time=()=>new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+function startQueue(startId){const idx=Math.max(0,roster.findIndex(d=>d.id===String(startId)));return roster.slice(idx).concat(roster.slice(0,idx)).map(d=>d.id);}
+function resetRunExecution(run,startId=run.startId){
+ run.startId=String(startId||roster[0]?.id||'');
+ run.queue=startQueue(run.startId);
+ run.sent=[];run.dropped=[];run.staged=[];run.firstStageId=null;run.done=false;run.log=[];
+}
+function resetCurrentDay(){
+ for(const run of state.searches)resetRunExecution(run);
+ state.hold=false;
+ state.subscribed=new Set(state.selected?[state.selected]:[]);
+ state.inboxes={};state.activity=[];state.showExtra={};
+ if(state.selected)ensureInbox(state.selected);
+ log('Administrator reset current day queues, first staging, Done flags and demo messages');
+}
+function search(name,start,count=4,active=true){const startId=String(start);return {name,startId,queue:startQueue(startId),sent:[],dropped:[],count,active,log:[],staged:[],firstStageId:null,done:false};}
+const ELEMENTS=['Exterior','Interior','Vehicle','Container'];
+const TRIAL_TYPES=['NW1','NW2','NW3','L1E','L1I','L1V','L1C','L2E','L2I','L2V','L2C','L3E','L3I','L3V','L3C','Elite','Elite S','Elite P','Summit','ORT','Custom'];
+const SESSION_CHOICES=['AM','PM','All Day'];
+const TYPE_TO_ELEMENT={E:'Exterior',I:'Interior',V:'Vehicle',C:'Container'};
+function trialTypeOf(t){let name=String(t.type||t.name||'').trim().toUpperCase();if(name.startsWith('ELITE PREMIER'))return 'Elite P';if(name.startsWith('ELITE SELECT'))return 'Elite S';return TRIAL_TYPES.find(v=>name===v.toUpperCase())||TRIAL_TYPES.find(v=>name.startsWith(v.toUpperCase()+' ')||name.startsWith(v.toUpperCase()+' ·'))||'Custom';}
+function templateRun(element,index,selectable=false){const s=search(element||`Run ${index+1}`,roster[0]?.id||'1',4,!selectable);s.element=selectable?'':element;s.elementLocked=!selectable;s.selectable=selectable;s.customName=false;s.staged=[];s.firstStageId=null;s.done=false;return s;}
+// Default names depend on how many runs share an element within the SAME trial day.
+// Names manually changed by Administrator are never silently overwritten.
+function defaultRunName(run,index,all){
+ const element=String(run.element||'').trim();
+ if(!element)return `Run ${index+1}`;
+ const count=all.filter(r=>r.element===element).length;
+ const ordinal=all.slice(0,index+1).filter(r=>r.element===element).length;
+ return count>1?`${element} ${ordinal}`:element;
+}
+function refreshDefaultNames(runs){runs.forEach((run,i)=>{if(!run.customName)run.name=defaultRunName(run,i,runs);});}
+
+function runsForType(type){
+ if(['NW1','NW2','NW3'].includes(type)){const count={NW1:4,NW2:5,NW3:6}[type];const runs=Array.from({length:count},(_,i)=>i<4?templateRun(ELEMENTS[i],i):templateRun('',i,true));refreshDefaultNames(runs);return runs;}
+ if(/^L[123][EIVC]$/.test(type)){const element=TYPE_TO_ELEMENT[type.slice(-1)];const runs=Array.from({length:4},(_,i)=>templateRun(element,i));refreshDefaultNames(runs);return runs;}
+ if(type==='ORT'){const runs=Array.from({length:3},(_,i)=>templateRun('Container',i));refreshDefaultNames(runs);return runs;}
+ if(['Elite','Elite S','Elite P'].includes(type)){const count=type==='Elite'?3:4;return Array.from({length:count},(_,i)=>{const r=search(`Run ${i+1}`,roster[0]?.id||'1',4,true);r.element='';r.elementLocked=false;r.selectable=false;r.customName=false;r.staged=[];r.firstStageId=null;r.done=false;return r;});}
+ if(type==='Summit')return [];
+ return [{...search('Run 1',roster[0]?.id||'1',4,false),element:'',elementLocked:false,selectable:false,customName:false,staged:[]}];
+}
+function optionsForTypes(selected='NW1'){return TRIAL_TYPES.map(x=>{const label=/^L[123][EIVC]$/.test(x)?`${x} — ${TYPE_TO_ELEMENT[x.slice(-1)]} (4 runs)`:x==='Elite S'?'Elite S — Select (4 runs)':x==='Elite P'?'Elite P — Premier (4 runs)':x;return `<option value="${escapeHTML(x)}" ${selected===x?'selected':''}>${escapeHTML(label)}</option>`;}).join('');}
+function sessionOptions(selected='All Day'){return SESSION_CHOICES.map(x=>`<option value="${x}" ${selected===x?'selected':''}>${x}</option>`).join('');}
+function niceTrialDate(d){return `${escapeHTML(d.date)} · ${escapeHTML(d.session||'All Day')}`;}
+
+const state={tab:'dog',selected:'16',hold:false,subscribed:new Set(['16']),inboxes:{},activity:[],showExtra:{},searches:[search('Vehicles',10,5),search('Interior · Chapel',12,3),search('Exterior · Chapel',14,4)]};
+// A trial owns one master roster shared by its days. Every run/day has independent execution state.
+function sampleDay(date,label){const rr=roster.map(d=>({...d}));return {date,label,roster:rr,hold:false,subscribed:new Set(),inboxes:{},activity:[],searches:[search('Vehicles',10,5),search('Interior · Chapel',12,3),search('Exterior · Chapel',14,4)]};}
+const firstDay={date:'2026-10-17',label:'Saturday · example',roster:roster.map(d=>({...d})),searches:state.searches,hold:state.hold,subscribed:state.subscribed,inboxes:state.inboxes,activity:state.activity};
+state.events=[{id:'summit',name:'Pikes Peak Nose Work Summit'},{id:'separate',name:'Front Range Weekend Trials'}];
+state.trials=[
+ {name:'NW3 · Summit Trial A',eventId:'summit',days:[firstDay,sampleDay('2026-10-18','Sunday · Trial A')]},
+ {name:'NW3 · Summit Trial B',eventId:'summit',days:[sampleDay('2026-10-17','Saturday · Trial B')]},
+ {name:'Elite · Summit Trial C',eventId:'summit',days:[sampleDay('2026-10-18','Sunday · Trial C')]},
+ {name:'NW3 · Front Range Trial',eventId:'separate',days:[sampleDay('2026-11-07','Saturday · Trial 1'),sampleDay('2026-11-08','Sunday · Trial 1')]},
+ {name:'L1 · Front Range Trial',eventId:'separate',days:[sampleDay('2026-11-07','Saturday · Trial 2')]}
+];
+state.trial=0;state.day=0;state.trials.forEach(t=>{t.type=trialTypeOf(t);t.session='All Day';t.roster=t.days[0].roster;t.days.forEach(d=>{d.roster=t.roster;d.pairs=[];d.session='All Day';d.searches.forEach(s=>{s.element=s.element||'';s.customName=true;s.staged=[];s.firstStageId=null;s.done=false;});});});
+const currentTrial=()=>state.trials[state.trial];
+const currentEvent=()=>state.events.find(e=>e.id===currentTrial().eventId)||state.events[0];
+const eventTrialIndices=id=>state.trials.map((t,i)=>({t,i})).filter(x=>x.t.eventId===id).map(x=>x.i);
+const eventDates=id=>[...new Set(eventTrialIndices(id).flatMap(i=>state.trials[i].days.map(d=>d.date)))].sort();
+const trialsOnDate=(eventId,date)=>eventTrialIndices(eventId).filter(i=>state.trials[i].days.some(d=>d.date===date));
+function selectTrialDay(ti,date){state.trial=ti;const index=currentTrial().days.findIndex(d=>d.date===date);state.day=index>=0?index:0;switchDay();}
+const dayTitle=()=>`${currentDay().date} · ${currentTrial().name}`;
+state.role='admin';state.tab='admin';state.theme='indoor';state.stewardStation='gate';state.gateRunIndex=0;state.adminSection='events';state.showFullRoster=false;state.editTeam=null;state.adminEventId=state.trials[0].eventId;state.adminTrialChosen=true;state.deleteEventPending=null;state.contextOpen=false;
+const currentDay=()=>currentTrial().days[state.day];
+for(const k of ['searches','hold','subscribed','inboxes','activity']){delete state[k];Object.defineProperty(state,k,{enumerable:false,configurable:true,get(){return currentDay()[k]},set(v){currentDay()[k]=v;}});}
+function switchDay(){roster=currentTrial().roster;currentTrial().days.forEach(d=>{d.roster=roster;d.pairs??=[];d.searches.forEach(r=>{r.staged??=[];r.firstStageId??=null;r.done??=false;if(typeof r.customName!=='boolean')r.customName=true;});});state.showExtra={};state.editTeam=null;if(!roster.some(d=>d.id===state.selected))state.selected=roster[0]?.id||'';if(roster.length&&state.selected)ensureInbox(state.selected);if(!state.searches[state.gateRunIndex]?.active)state.gateRunIndex=Math.max(0,state.searches.findIndex(s=>s.active));}
+function blankDay(date,label,type='Custom',session='All Day'){return {date,label,session,roster:currentTrial()?.roster||roster,searches:runsForType(type),pairs:[],hold:false,subscribed:new Set(),inboxes:{},activity:[]};}
+function nextDate(date){const t=Date.parse(date+'T00:00:00Z');return new Date(t+86400000).toISOString().slice(0,10);}
+function trialBar(){const event=currentEvent(),date=currentDay().date,dates=eventDates(event.id),available=trialsOnDate(event.id,date);return `<div class="trialbar" aria-label="Event and trial date selectors"><div class="field"><label for="eventSelect">Event</label><select id="eventSelect">${state.events.map(e=>`<option value="${escapeHTML(e.id)}" ${e.id===event.id?'selected':''}>${escapeHTML(e.name)}</option>`).join('')}</select></div><div class="field"><label for="dateSelect">Calendar date</label><select id="dateSelect">${dates.map(d=>`<option value="${escapeHTML(d)}" ${d===date?'selected':''}>${escapeHTML(d)}</option>`).join('')}</select></div><div class="field"><label for="trialSelect">Trial on this date</label><select id="trialSelect">${available.map(i=>`<option value="${i}" ${state.trial===i?'selected':''}>${escapeHTML(state.trials[i].name)}</option>`).join('')}</select></div></div><div class="view-settings"><div class="field"><label for="themeSelect">Display</label><select id="themeSelect"><option value="indoor" ${state.theme==='indoor'?'selected':''}>Indoor · high contrast</option><option value="outdoor" ${state.theme==='outdoor'?'selected':''}>Outdoor · sunlight</option></select></div></div>`;}
+
+function contextControls(){return `<div class="context-toolbar"><div class="context-summary"><strong>${escapeHTML(currentTrial().name)}</strong><span>${escapeHTML(currentDay().date)} · ${escapeHTML(currentEvent().name)}</span></div><span class="context-health ${state.hold?'is-hold':''}">${state.hold?'WEATHER HOLD':'Trial day'}</span><button class="sm" type="button" data-context-toggle="1" aria-expanded="${!!state.contextOpen}">${state.contextOpen?'Hide choices':'Change trial'}</button></div><div class="context-controls ${state.contextOpen?'is-open':''}">${trialBar()}</div>`;}
+function roleSwitcher(){return `<div class="role-switcher" role="group" aria-label="Switch local demo roles"><div class="switch-label"><b>Choose a mode</b><span>Demo roles only; real access control requires a backend</span></div><div class="role-buttons"><button type="button" data-role="viewer" class="${state.role==='viewer'?'primary':''}" aria-pressed="${state.role==='viewer'}">My Dog</button><button type="button" data-role="steward" class="${state.role==='steward'?'primary':''}" aria-pressed="${state.role==='steward'}">Steward</button><button type="button" data-role="admin" class="${state.role==='admin'?'primary':''}" aria-pressed="${state.role==='admin'}">Admin</button></div></div>`;}
+const app=document.getElementById('app');
+function stamp(who,text){const id=String(state.selected);if(!state.inboxes[id])state.inboxes[id]=[];state.inboxes[id].push({who,text,at:time()});}
+function addMessage(id,who,text){id=String(id);state.inboxes[id]??=[];state.inboxes[id].push({who,text,at:time()});}
+function log(text){state.activity.unshift({at:time(),text});state.activity=state.activity.slice(0,150);}
+function ensureInbox(id){id=String(id);const d=byId(id);if(!d)return;if(!state.inboxes[id])state.inboxes[id]=[{who:'in',text:`SCENT TRIAL DEMO — Welcome, ${d.dog}! This is a local simulation. No actual SMS will be sent. Reply STATUS for your positions, or STOP to opt out.`,at:time()}];}
+ensureInbox('16');
+function pos(s,id){return s.queue.indexOf(id);}
+function describe(s,id){
+ if(s.dropped.includes(id))return {name:'Dropped',detail:'Ask the gate steward',type:'drop',num:'—'};
+ if(s.sent.includes(id))return s.done
+  ? {name:'Run Done',detail:'Administrator confirmed the run is finished',type:'done',num:'✓'}
+  : {name:'Sent to search',detail:'Gate dispatch recorded; search finish not confirmed',type:'sent',num:'✓'};
+ const n=pos(s,id);
+ if(n<0)return {name:'Not queued',detail:'Ask the gate steward',type:'drop',num:'—'};
+ if(n===0)return {name:state.hold?'Next · hold':'NEXT TO SEND',detail:'0 dogs ahead',type:'next',num:'0'};
+ // Count includes the next dog at position 0: no phantom on-deck positions.
+ if(n<Math.max(1,s.count))return {name:state.hold?'On deck · hold':'ON DECK',detail:`${n} ${n===1?'dog':'dogs'} ahead`,type:'near',num:String(n)};
+ return {name:state.hold?'Waiting · hold':'Waiting',detail:`${n} ${n===1?'dog':'dogs'} ahead`,type:'wait',num:String(n)};
+}
+function statusReply(id){const d=byId(id);if(!d)return 'No selected dog. Choose a dog in the demo.';const lines=state.searches.filter(s=>s.active).map(s=>{const q=describe(s,id);if(['Sent to search','Run Done','Dropped'].includes(q.name))return `${s.name}: ${q.name}`;return `${s.name}: ${q.detail}${pos(s,id)===0?' — NEXT':''}`;});return `STATUS · ${d.dog} (#${d.num}) · ${currentTrial().name} / ${currentDay().label}\n${state.hold?'WEATHER HOLD — dispatch paused.\n':''}${lines.length?lines.join('\n'):'No active searches.'}\n${state.hold?'No dogs may be dispatched until the hold ends.':'Positions are based on the current trial queue.'}`;}
+function receiveSMS(command){const id=state.selected;ensureInbox(id);const cleaned=String(command||'').trim().slice(0,160);if(!cleaned)return;addMessage(id,'out',cleaned);const cmd=cleaned.toUpperCase().split(/\s+/)[0];if(cmd==='STOP'||cmd==='UNSUBSCRIBE'||cmd==='CANCEL'){state.subscribed.delete(id);addMessage(id,'in','You are unsubscribed from Scent Trial demo alerts. Reply START to opt in again.');log(`${plain(id)} unsubscribed via mock SMS`);}else if(cmd==='START'||cmd==='UNSTOP'){state.subscribed.add(id);addMessage(id,'in',`You are subscribed to DEMO alerts for ${byId(id).dog}. Reply STATUS for positions. Reply STOP to opt out.`);log(`${plain(id)} subscribed via mock SMS`);}else if(cmd==='STATUS'){if(!state.subscribed.has(id))addMessage(id,'in','You are unsubscribed. Reply START to rejoin demo notifications.');else addMessage(id,'in',statusReply(id));}else if(cmd==='HELP'){addMessage(id,'in','Scent Trial DEMO: Reply STATUS for your dog’s positions, START to subscribe, or STOP to opt out. This is a simulation; no SMS is sent.');}else{addMessage(id,'in','Command not recognized. Reply STATUS, HELP, START or STOP. Demo only.');}}
+function mockNotify(id,text){if(!state.subscribed.has(String(id)))return;ensureInbox(id);addMessage(id,'in',`SCENT TRIAL DEMO · ${text}`);log(`Mock SMS → ${plain(id)}: ${text}`);}
+// Send one highest-urgency alert when a position moves across a threshold.
+function alertsFor(searchBefore,s){for(const id of state.subscribed){const old=searchBefore.indexOf(id),n=s.queue.indexOf(id);if(old<0||n<0||n>=old)continue;const dog=byId(id);if(!dog)continue;let alert=null;const onDeckLimit=Math.max(0,s.count-1);if(old>0&&n===0)alert=`${dog.dog} is NEXT TO SEND for ${s.name}. Please report to the gate steward.`;else if(old>onDeckLimit&&n<=onDeckLimit&&n>0)alert=`${dog.dog} is ON DECK for ${s.name}, ${n} ${n===1?'dog':'dogs'} ahead.`;else if(old>5&&n<=5)alert=`${dog.dog} has ${n} dogs ahead in ${s.name}. Time to prepare.`;if(alert)mockNotify(id,alert);}}
+function pairedRunIndex(index){return (currentDay().pairs||[]).find(pair=>pair.includes(index))||null;}
+function pairLabel(index){const pair=pairedRunIndex(index);if(!pair)return '';const partner=pair[0]===index?pair[1]:pair[0];return `Back-to-back · Runs ${pair[0]+1} → ${pair[1]+1}`;}
+function runOrderComplete(s){return s.queue.length===0;}
+function runStatus(s){return s.done?'Done':runOrderComplete(s)?'Run order complete':'Running';}
+function onDeckIds(s){return s.queue.slice(0,s.count);}
+// First staging is released when the Gate Steward sends a dog: everyone moves forward.
+// A parking-lot call does not dispatch the dog; it records who was called for staging.
+function nextNotOnDeck(s){if(runOrderComplete(s)||s.done)return null;const index=state.searches.indexOf(s);const pair=pairedRunIndex(index);const protectedCount=pair?Math.max(...pair.map(k=>state.searches[k].count)):s.count;const onDeck=new Set(s.queue.slice(0,protectedCount));return s.queue.find(id=>!onDeck.has(id)&&!(s.staged||[]).includes(id))||null;}
+function nextToStage(s){return s.firstStageId?null:nextNotOnDeck(s);}
+function stageNext(index){
+ if(!['steward','admin'].includes(state.role)||state.hold)return;
+ const s=state.searches[index];if(!s||!s.active||s.done)return;
+ const targets=pairedRunIndex(index)||[index];
+ const targetRuns=targets.map(i=>state.searches[i]);
+ if(targetRuns.some(r=>!r||!r.active||r.firstStageId||r.done)||targets.some(i=>nextToStage(state.searches[i])!==nextToStage(s))){alert('A dog is already called to first staging. Send the next dog at the gate before another parking-lot call, or resolve a paired-queue mismatch.');return;}
+ const id=nextToStage(s);if(!id)return;
+ for(const run of targetRuns){run.staged??=[];if(!run.staged.includes(id))run.staged.push(id);run.firstStageId=id;}
+ log(`${plain(id)} called to first staging for ${targets.map(i=>state.searches[i].name).join(' + ')}`);
+}
+
+function dispatch(s,type,id,anchor,skipCount=1){
+ const i=state.searches.indexOf(s);if(i<0)return;
+ const pair=pairedRunIndex(i);
+ if(s.done)return;if(!pair){dispatchSingle(s,type,id,anchor,skipCount);return;}
+ const runs=pair.map(k=>state.searches[k]);
+ if(runs.some(r=>!r||!r.active||r.done))return;
+ // Pair changes must succeed together. Execute the same action on both aligned queues.
+ if(JSON.stringify(runs[0].queue)!==JSON.stringify(runs[1].queue)||JSON.stringify(runs[0].sent)!==JSON.stringify(runs[1].sent)||JSON.stringify(runs[0].dropped)!==JSON.stringify(runs[1].dropped)){alert('Paired queues have diverged. Ask Administrator to reset or unpair.');return;}
+ runs.forEach(r=>dispatchSingle(r,type,id,anchor,skipCount));
+}
+function dispatchSingle(s,type,id,anchor,skipCount=1){if(!['admin','steward'].includes(state.role)||!state.searches.includes(s))return;if(state.hold||!s.active||s.done){log('Blocked dispatch: trial on hold, inactive or marked Done');return;}const before=s.queue.slice();if(type==='send'){if(!s.queue.length)return;const target=s.queue.shift();s.sent.push(target);log(`${s.name}: sent ${plain(target)}`);}else if(type==='skip'){if(s.queue.length<2)return;const count=Math.min(s.queue.length-1,Math.max(1,Number.parseInt(skipCount,10)||1));const target=s.queue.shift();s.queue.splice(count,0,target);log(`${s.name}: skipped ${plain(target)} by ${count} position${count===1?'':'s'}`);}else if(type==='out'){const i=s.queue.indexOf(id);if(i<0)return;const target=s.queue.splice(i,1)[0];s.sent.push(target);log(`${s.name}: sent ${plain(target)} out of order`);}else if(type==='drop'){const i=s.queue.indexOf(id);if(i<0)return;const target=s.queue.splice(i,1)[0];s.dropped.push(target);log(`${s.name}: dropped ${plain(target)}`);}else if(type==='restore'){const i=s.dropped.indexOf(id);if(i<0)return;s.dropped.splice(i,1);s.queue.push(id);log(`${s.name}: restored ${plain(id)} at end`);}else if(type==='move'){if(!s.queue.includes(id))return;s.queue=s.queue.filter(d=>d!==id);s.queue.unshift(id);log(`${s.name}: moved ${plain(id)} to front`);}else if(type==='before'||type==='after'){if(id===anchor||!s.queue.includes(id)||!s.queue.includes(anchor))return;s.queue=s.queue.filter(d=>d!==id);s.queue.splice(s.queue.indexOf(anchor)+(type==='after'?1:0),0,id);log(`${s.name}: moved ${plain(id)} ${type} ${plain(anchor)}`);}if((type==='send'||type==='out')&&before.length>s.queue.length&&s.firstStageId){
+   const stagedDog=s.firstStageId;
+   s.firstStageId=null;
+   log(`${s.name}: dog sent at gate; staging line advanced after ${plain(stagedDog)} was called`);
+ }alertsFor(before,s);}
+function changeHold(value){if(state.role!=='admin')return;state.hold=value;log(value?'Administrator set WEATHER HOLD':'Administrator resumed searches');for(const id of state.subscribed)mockNotify(id,value?'WEATHER HOLD. All searches are paused. Please remain available.':'WEATHER HOLD LIFTED. Running positions are unchanged. Text STATUS for current positions.');}
+function options(selected){return roster.map(d=>`<option value="${d.id}" ${String(d.id)===String(selected)?'selected':''}>#${d.num} ${escapeHTML(d.dog)} — ${escapeHTML(d.handler)}</option>`).join('');}
+function positionCards(){return state.searches.filter(s=>s.active).map(s=>{const q=describe(s,state.selected);return `<div class="status-card ${q.type}"><h3>${escapeHTML(s.name)}</h3>${pairLabel(state.searches.indexOf(s))?`<div class="small"><strong>${escapeHTML(pairLabel(state.searches.indexOf(s)))}</strong></div>`:''}<div class="bigmetric">${q.num}</div><div class="status-name">${escapeHTML(q.name)}</div><div class="status-detail">${escapeHTML(q.detail)}</div><div class="cardtag">${q.type==='done'?'Admin confirmed Done':q.type==='sent'?'Gate dispatch only':q.type==='drop'?'Check with steward':q.type==='next'?'Report to gate':q.type==='near'?'Be ready':'Track progress'}</div></div>`;}).join('');}
+function smsPhone(){ensureInbox(state.selected);const m=state.inboxes[state.selected];return `<div class="sms-sim"><div class="phone"><div class="phone-top"><div class="avatar">✦</div><div><strong>Scent Trial · DEMO messages</strong><small>Simulated SMS · no cellular connection</small></div></div><div class="messages" id="smsMessages" aria-label="Mock text messages">${m.length?m.map(x=>`<div class="bubble ${x.who==='out'?'out':'in'}">${escapeHTML(x.text)}<span class="when">${escapeHTML(x.at)} · demo</span></div>`).join(''):'<div class="empty-chat">Choose STATUS to request your trial position.</div>'}</div><form class="chat-send" id="smsForm"><label class="sr-only" for="smsInput">Mock text message</label><input id="smsInput" autocomplete="off" maxlength="160" placeholder="Text STATUS, STOP, START..."><button class="primary" aria-label="Send simulated text" type="submit">➤</button></form></div><div class="sms-mock">Local simulation only · 0 real texts sent · no charges</div></div><div class="quick" aria-label="Test text commands"><button data-sms="STATUS">Text STATUS</button><button data-sms="STOP">Text STOP</button><button data-sms="START">Text START</button><button data-sms="HELP">Text HELP</button></div>`;}
+function dogView(){const d=byId(state.selected);if(!d)return `<section class="panel"><h2>No teams in this day</h2><p>The administrator can add this trial day’s running order.</p></section>`;return `<div class="cols"><div><section class="panel"><div class="sectionhead"><div><span class="eyebrow">Competitor view</span><h2>Follow your dog</h2><p>See your position in every active search, even when starting positions differ.</p></div></div><div class="dog-select"><div><label for="watchDog">Dog / run number</label><select id="watchDog">${options(state.selected)}</select></div><span class="tag">${roster.length} sample teams</span></div><div style="height:14px"></div><div class="status-grid">${positionCards()||'<p>No active searches.</p>'}</div><div class="steps"><span class="tag">Local queue preview</span><span class="tag">Actual remaining queue</span><span class="tag">Independent searches</span></div><div class="subtle" style="margin-top:15px"><h3 style="margin-bottom:5px">How this works without competitor internet</h3><p class="muted small">At a real trial, only the administrator needs an internet connection to the server. The competitor can receive ordinary cellular texts and reply STATUS. This phone screen is a simulation, not a working SMS gateway.</p></div></section><section class="panel" style="margin-top:13px"><div class="sectionhead"><div><h2>Try an automatic alert</h2><p>Open Running board, send the next dog in a search, then return here to see whether an SMS alert was triggered.</p></div></div><div class="steps"><button class="primary" data-tab="board">Open running board</button></div></section></div><div><section class="panel"><div class="sectionhead"><div><span class="eyebrow">SMS fallback</span><h2>Text conversation · ${escapeHTML(d.dog)}</h2><p>All messages stay on this device.</p></div></div><div class="check" style="margin-bottom:12px"><input id="optin" type="checkbox" ${state.subscribed.has(state.selected)?'checked':''} ${state.role==='viewer'?'disabled':''}><div><label for="optin">Demo alerts enabled</label><p>Only opted-in sample dogs receive simulated alerts when a queue crosses 5, 2 or 0 dogs ahead.</p></div></div>${smsPhone()}</section></div></div>`;}
+function boardCard(s,i){const last=byId(s.sent.at(-1)),next=byId(s.queue[0]),extra=state.showExtra[i];return `<article class="search-board"><div class="top"><div class="tiny">Search ${i+1} · ACTIVE</div><h3>${escapeHTML(s.name)}</h3>${pairLabel(i)?`<div class="tag">${escapeHTML(pairLabel(i))} · dispatch together</div>`:''}<div class="meta">${s.sent.length} sent · ${s.queue.length} waiting · ${s.dropped.length} dropped · <span class="run-status status-${s.done?'done':runOrderComplete(s)?'complete':'active'}">${runStatus(s)}</span></div></div><div class="last"><div class="tiny">Last dog sent</div><strong>${last?escapeHTML(last.dog):'None yet'}</strong><span class="muted small">${last?'#'+last.num+' · '+escapeHTML(last.handler):'Awaiting dispatch'}</span></div><div class="deck"><div class="tiny">Next to send</div></div><div class="nextline"><div class="runnum">${next?'#'+next.num:'—'}</div><div><strong>${next?label(next.id):s.done?'Done':'Run order complete'}</strong><div class="muted small">First in actual dispatch queue</div></div></div><div class="deck"><div class="deckhead"><strong class="tiny">On deck</strong><span class="small muted">Top ${s.count} dogs</span></div>${s.queue.slice(0,s.count).map((id,p)=>`<div class="deck-row ${id===state.selected?'mine':''}"><span class="index">${p+1}</span><span class="runnum" style="padding:5px 4px;min-width:31px;font-size:11px">#${byId(id).num}</span><span>${label(id)} ${id===state.selected?'<span class="tag urgent">FOLLOWED</span>':''}</span></div>`).join('')||'<p class="small muted">No dogs waiting</p>'}</div>${state.role!=='viewer'?`<div class="board-actions"><button class="primary send-action" data-do="send" data-idx="${i}" ${state.hold||!s.queue.length||s.done?'disabled':''}>Send next</button><div class="skip-control"><label for="skip-count-${i}">Skip positions</label><input id="skip-count-${i}" type="number" inputmode="numeric" min="1" max="${Math.max(1,s.queue.length-1)}" value="1" aria-label="Number of positions to skip in ${escapeHTML(s.name)}"><button data-do="skip" data-idx="${i}" ${state.hold||s.queue.length<2||s.done?'disabled':''}>Skip</button></div><button class="soft" data-expand="${i}">${extra?'Hide actions':'More actions'}</button>${extra?`<div class="inline-controls" style="width:100%"><label for="extra-${i}">Choose a waiting dog</label><select id="extra-${i}">${s.queue.map(id=>`<option value="${id}">${plain(id)} — ${escapeHTML(byId(id).handler)}</option>`).join('')}</select><div class="selectrow"><button data-do="out" data-idx="${i}" class="send-action" ${state.hold?'disabled':''}>Send out of order</button><button data-do="move" data-idx="${i}" ${state.hold?'disabled':''}>Move to front</button><button data-do="drop" data-idx="${i}" ${state.hold?'disabled':''}>Drop</button></div><label for="anchor-${i}">Reposition selected dog relative to</label><select id="anchor-${i}">${s.queue.map(id=>`<option value="${id}">${plain(id)} — ${escapeHTML(byId(id).handler)}</option>`).join('')}</select><div class="selectrow"><button data-do="before" data-idx="${i}">Move before</button><button data-do="after" data-idx="${i}">Move after</button></div>${s.dropped.length?`<label for="restore-${i}">Dropped dogs</label><select id="restore-${i}">${s.dropped.map(id=>`<option value="${id}">${plain(id)}</option>`).join('')}</select><button data-do="restore" data-idx="${i}">Restore to end</button>`:''}</div>`:''}</div>`:'<div class="board-actions"><span class="small muted">Read-only running board · switch to Gate steward demo role to try dispatching.</span></div>'}</article>`;}
+function stewardView(){
+ const active=state.searches.map((s,i)=>({s,i})).filter(x=>x.s.active);
+ const tabs=`<div class="station-tabs" role="group" aria-label="Steward station"><button data-station="gate" class="${state.stewardStation==='gate'?'selected':''}" aria-pressed="${state.stewardStation==='gate'}">Gate Steward</button><button data-station="parking" class="${state.stewardStation==='parking'?'selected':''}" aria-pressed="${state.stewardStation==='parking'}">Parking Lot Steward</button></div>`;
+ if(state.stewardStation==='parking')return `${tabs}<section class="sectionhead"><div><span class="eyebrow">Parking lot · all active runs</span><h2>Parking Lot Steward</h2><p>See each run's on-deck dogs. Call the next dog not on deck after the gate sends a dog and staging advances.</p></div></section>${state.hold?'<div class="banner-hold">WEATHER HOLD — staging paused</div>':''}<div class="parking-grid">${active.map(({s,i})=>{
+ const id=nextNotOnDeck(s),dog=byId(id),occupant=byId(s.firstStageId),deck=onDeckIds(s),complete=runOrderComplete(s);
+ const status=s.done?'Done':complete?'Run order complete':occupant?'First staging occupied':'First staging empty';
+ return `<article class="staging-card ${s.done?'is-done':complete?'is-complete':'is-active'}"><div class="tiny">Run ${i+1} · ${escapeHTML(status)}</div><h3>${escapeHTML(s.name)}</h3>${pairLabel(i)?`<div class="tag staging-pair">${escapeHTML(pairLabel(i))} · shared staging</div>`:''}
+ <div class="staging-status ${occupant?'is-occupied':''}"><strong>${s.done?'Done':complete?'Run order complete':occupant?'First staging occupied':'First staging empty'}</strong><div class="small">${s.done?'Administrator confirmed final completion':complete?'No dogs remain awaiting dispatch':occupant?`#${occupant.num} ${escapeHTML(occupant.dog)} · ${escapeHTML(occupant.handler)}`:'Available for the next call'}</div></div>
+ <div class="tiny">On deck · ${deck.length} of ${s.count}</div><div class="staging-deck">${deck.map((team,p)=>`<div class="deck-row"><span class="index">${p+1}</span><span>${label(team)} <span class="muted">#${byId(team)?.num||'?'}</span></span></div>`).join('')||'<p class="small muted">No dogs on deck</p>'}</div>
+ <div class="tiny" style="margin-top:12px">Next dog not on deck</div><div class="staging-dog">${s.done?'Done':complete?'Run order complete':dog?`#${dog.num} ${escapeHTML(dog.dog)}`:occupant?'Waiting for gate to send':'No eligible unstaged dog yet'}</div>
+ <p class="muted small">${dog?escapeHTML(dog.handler):complete?'All dogs processed':occupant?'Next call available after a gate send':'Waiting for an on-deck position to free'} · ${(s.staged||[]).length} dogs called</p>
+ <button class="primary send-action" data-stage="${i}" ${!dog||state.hold||s.done||complete||occupant?'disabled':''}>${occupant?'Await gate send':'Call to first staging'}</button>
+ </article>`;}).join('')||'<section class="panel"><h3>No active runs</h3><p>Administrator must activate a run.</p></section>'}</div><p class="small muted" style="margin-top:12px">When the gate steward sends a dog, the line advances and first staging becomes available for the next call. Paired runs share this transition.</p>`;
+ if(active.length&&!active.some(x=>x.i===state.gateRunIndex))state.gateRunIndex=active[0].i;
+ const selected=state.searches[state.gateRunIndex];
+ return `${tabs}<section class="sectionhead"><div><span class="eyebrow">One selected run only</span><h2>Gate Steward</h2><p>Only the run assigned to this gate is displayed. Paired runs still advance together when this gate dispatches a dog.</p></div></section><div class="station-selector"><label for="gateRunSelect">Gate assignment · active run</label><select id="gateRunSelect">${active.map(({s,i})=>`<option value="${i}" ${i===state.gateRunIndex?'selected':''}>Run ${i+1} · ${escapeHTML(s.name)}</option>`).join('')}</select></div>${state.hold?'<div class="banner-hold">WEATHER HOLD — dispatch paused</div>':''}<div class="gate-focus">${selected?.active?boardCard(selected,state.gateRunIndex):'<section class="panel">No active run selected.</section>'}</div>`;
+}
+function boardView(){const hold=state.hold?`<div class="banner-hold"><strong>⚠ WEATHER HOLD — no dogs may be dispatched</strong>${state.role==='admin'?'<button class="primary" data-action="resume">Resume</button>':''}</div>`:'';return `${hold}<div class="sectionhead"><div><span class="eyebrow">Running board · ${escapeHTML(state.role)}</span><h2>Live running board</h2><p>Unpaired runs advance separately. Two runs may be paired back-to-back, and one steward action advances both. Stewards cannot change event, trial or run setup.</p></div><div><button class="soft" data-tab="dog">My dog / SMS</button></div></div><div class="board-grid">${state.searches.map((s,i)=>s.active?boardCard(s,i):'').join('')||'<section class="panel"><h3>No active searches</h3><p>Administrator can activate searches for this trial day.</p></section>'}</div><p class="muted small" style="margin-top:14px">All dispatches are simulated locally. This screen has no authentication and must not be used to run a real trial.</p>`;}
+function adminView(){const msgs=Object.values(state.inboxes).reduce((n,v)=>n+v.filter(m=>m.who==='in').length,0);return `<div class="cols"><div><section class="panel"><div class="sectionhead"><div><span class="eyebrow">Trial control</span><h2>Administrator controls</h2><p>Simulate the administrator who has the only internet connection at the venue.</p></div></div><div class="banner-hold"><div><strong>${state.hold?'⚠ Weather hold active':'✓ Searches are running'}</strong><div class="small">${state.hold?'Queue order is preserved.':'Dispatches are allowed.'}</div></div><button class="${state.hold?'primary':'warn'}" data-action="${state.hold?'resume':'hold'}">${state.hold?'Lift hold':'Set weather hold'}</button></div><div class="admin-cards"><div class="metricbox"><strong>${state.subscribed.size}</strong><span>Simulated opted-in recipients</span></div><div class="metricbox"><strong>${msgs}</strong><span>Simulated inbound-to-phone messages</span></div><div class="metricbox"><strong>0</strong><span>Actual SMS messages sent</span></div><div class="metricbox"><strong>0</strong><span>Servers / APIs connected</span></div></div><div class="subtle" style="margin-top:13px"><h3>Planned production behavior</h3><p class="small muted" style="margin-top:6px">Set up events, trials and their runs in Administrator. Each run has its own start, on-deck size and queue for a trial day. An internet-connected administrator would update the server. A server-side SMS provider would send alerts to opted-in competitors, process STATUS/STOP replies, and log delivery failures. For a real event, this requires backend deployment, phone number registration, consent handling and a messaging account.</p></div><div class="steps"><button data-tab="setup" class="primary">Trial setup · event, days and searches</button><button data-tab="board">Open dispatch board</button><button data-action="reset">Reset day queues</button></div></section></div><div><section class="panel"><div class="sectionhead"><div><h2>Recent actions</h2><p>In-memory log from this device only.</p></div></div><div class="log">${state.activity.length?state.activity.map(x=>`<div class="logentry"><small>${escapeHTML(x.at)}</small><div>${escapeHTML(x.text)}</div></div>`).join(''):'<p class="small muted">No updates yet. Dispatch a dog or text STATUS to begin.</p>'}</div></section><section class="panel" style="margin-top:13px"><h3>Notification rules shown in this demo</h3><div class="steps"><span class="tag">5 dogs ahead</span><span class="tag">2 dogs ahead</span><span class="tag urgent">Next to send</span><span class="tag warn">Weather hold</span></div><p class="small muted" style="margin-top:11px">The mock alert engine sends a single most-urgent message when one update crosses more than one threshold, rather than flooding the competitor.</p></section></div></div>${scheduleAdminView()}`;}
+
+function scheduleAdminView(){const e=currentEvent();const rows=eventDates(e.id).map(date=>{const sessions=eventTrialIndices(e.id).flatMap(i=>state.trials[i].days.map((d,di)=>({i,di,d}))).filter(x=>x.d.date===date);return `<div class="schedule-day"><h3>${escapeHTML(date)} <span class="muted small">· ${sessions.length} trial${sessions.length===1?'':'s'}</span></h3>${sessions.map(x=>`<div class="schedule-row"><div><strong>${escapeHTML(state.trials[x.i].name)}</strong><div class="small muted">${x.d.searches.length} searches · ${x.d.roster.length} dogs · ${escapeHTML(x.d.label)}</div></div><button class="sm ${state.trial===x.i&&state.day===x.di?'primary':''}" data-jump="${x.i}:${x.di}">${state.trial===x.i&&state.day===x.di?'Selected':'Open day'}</button></div>`).join('')}</div>`;}).join('');return `<section class="panel" style="margin-top:15px"><div class="sectionhead"><div><h2>Event schedule · ${escapeHTML(e.name)}</h2><p>One event can have multiple trials. Trials may span days, and multiple trials may share a date. Each trial-day has separate searches and queues.</p></div></div>${rows}</section>`;}
+function setupView(){const d=currentDay(),t=currentTrial();return `<div class="sectionhead"><div><span class="eyebrow">Full administrator trial setup</span><h2>Configure event, trial, calendar day and searches</h2><p>The original admin controls are back, with editable trials/days and offline CSV import. Each trial-day instance has its own roster, searches, starts and dispatch progress. Multiple trials may share the same calendar date.</p></div></div><section class="panel event-settings"><h3>Event setup</h3><p class="muted small">An event can group several trials, such as a Summit. The same date may contain two or more separate trials.</p><div class="formrow"><div><label for="editEventName">Current event name</label><input id="editEventName" value="${escapeHTML(currentEvent().name)}" maxlength="100"></div><button data-setup="renameEvent">Save event</button></div><div class="formrow"><div><label for="newEventName">Create new event</label><input id="newEventName" placeholder="New event name" maxlength="100"></div><button class="primary" data-setup="addEvent">Add event</button></div></section><div class="setup-grid"><section class="panel"><h3>1 · Trial and calendar date</h3><div class="settings-col"><div class="formrow"><div><label for="editTrialName">Trial name</label><input id="editTrialName" value="${escapeHTML(t.name)}" maxlength="100"></div><button data-setup="renameTrial">Save name</button></div><div class="formrow"><div><label for="newTrialName">Create another trial in this event, on this date</label><input id="newTrialName" placeholder="Trial name" maxlength="100"></div><button data-setup="addTrial" class="primary">Add trial</button></div><div class="formrow"><div><label for="editDayName">Day label</label><input id="editDayName" value="${escapeHTML(d.label)}" maxlength="100"></div><div><label for="editDayDate">Date</label><input id="editDayDate" type="date" value="${escapeHTML(d.date)}"></div><button data-setup="renameDay">Save day</button></div><div class="formrow"><div><label for="newDayDate">Add day to this trial</label><input id="newDayDate" type="date" value="${escapeHTML(d.date)}"></div><button data-setup="addDay" class="primary">Add day</button></div></div><p class="muted small">Use Event, Calendar date and Trial menus above to switch. More than one trial can run on a date. Existing dispatch progress is retained while this file stays open.</p></section>
+<section class="panel"><h3>2 · Master running order</h3><p class="muted small">${roster.length} teams. Paste spreadsheet rows, or upload a CSV/TSV file. Column order: run number, dog, handler. The import replaces this day's master roster and resets its search histories.</p><div class="settings-col"><label for="rosterPaste">Paste CSV or spreadsheet rows</label><textarea id="rosterPaste" rows="5" placeholder="Run,Dog,Handler\n1,Atlas,Morgan\n2,Fern,Lee"></textarea><div class="steps"><button data-setup="importPaste" class="primary">Import pasted roster</button><label for="rosterFile" class="filelabel">Choose CSV/TSV file</label><input id="rosterFile" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" class="hidden-file"></div><p class="muted small">Excel .xlsx files can be saved as CSV first. This offline HTML file doesn't upload anything.</p><div class="formrow"><div><label for="addRun">Run #</label><input type="number" min="1" id="addRun" value="${Math.max(0,...roster.map(x=>x.num))+1}"></div><div><label for="addDog">Dog name</label><input id="addDog" placeholder="Dog"></div><div><label for="addHandler">Handler</label><input id="addHandler" placeholder="First name"></div><button data-setup="addTeam">Add team</button></div><div class="roster-peek">${roster.slice(0,8).map(x=>`<span class="tag">#${x.num} ${escapeHTML(x.dog)} · ${escapeHTML(x.handler)}</span>`).join('')} ${roster.length>8?`<span class="small muted">+ ${roster.length-8} more</span>`:''}</div></div></section></div>
+<section class="panel" style="margin-top:14px"><div class="sectionhead"><div><h3>3 · Searches for this trial on ${escapeHTML(d.date)}</h3><p>Set each search's starting dog in the circular running order, on-deck count, and active status.</p></div><button data-setup="addSearch" class="primary">+ Add run</button></div><div class="setup-searches">${state.searches.map((s,i)=>`<article class="setup-search"><div class="settings-col"><label for="searchName-${i}">Search ${i+1} name</label><input id="searchName-${i}" maxlength="100" value="${escapeHTML(s.name)}"><label for="searchStart-${i}">Starting dog / run number</label><select id="searchStart-${i}">${options(s.startId||s.queue[0]||roster[0]?.id)}</select><div class="on-deck-control"><div><strong>On-deck group</strong><p class="muted small">${s.count} dogs (includes next to send)</p></div><div class="steps"><button data-setup="deckMinus" data-idx="${i}" ${s.count<=1?'disabled':''}>−</button><b>${s.count}</b><button data-setup="deckPlus" data-idx="${i}" ${s.count>=10?'disabled':''}>+</button></div></div><div class="steps"><button class="${s.active?'soft':'primary'}" data-setup="toggleActive" data-idx="${i}">${s.active?'Deactivate':'Activate'}</button><button data-setup="saveSearch" data-idx="${i}" class="primary">Save run</button><button data-setup="resetSearch" data-idx="${i}">Reset queue</button><button data-setup="removeSearch" data-idx="${i}">Remove</button></div><p class="small muted">${s.sent.length} sent · ${s.queue.length} waiting · ${s.dropped.length} dropped${s.active?'':' · INACTIVE'}</p></div></article>`).join('')||'<p>No searches yet. Add one above.</p>'}</div></section>
+<section class="panel" style="margin-top:14px"><h3>4 · Save/share trial setup</h3><p class="muted small" style="margin:7px 0 10px">This demo runs locally and does not automatically sync or store changes after closing. Export JSON to retain trial settings and progress, then import it on the same or another device. Do not import unknown files.</p><div class="steps"><button data-setup="export">Download setup backup (.json)</button><label for="backupFile" class="filelabel">Restore setup backup</label><input id="backupFile" class="hidden-file" type="file" accept="application/json,.json"><button data-action="reset">Reset this day's queues & messages</button></div></section>`;}
+function parseCSVLine(line,delimiter){const out=[];let field='',quoted=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(quoted&&line[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}else if(c===delimiter&&!quoted){out.push(field.trim());field='';}else field+=c;}if(quoted)throw Error('CSV has an unmatched quote.');out.push(field.trim());return out;}
+function parseRosterText(text){const raw=String(text||'').replace(/^\uFEFF/,'').trim();if(!raw)throw Error('Paste at least one roster row.');const lines=raw.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);const delim=lines[0].includes('\t')?'\t':',';const arr=lines.map(l=>parseCSVLine(l,delim));if(arr.length&&/^(run|number|#|dog|handler)/i.test(arr[0][0]))arr.shift();if(!arr.length)throw Error('No dog rows found.');if(arr.length>500)throw Error('Maximum 500 teams for this local demo.');const seen=new Set();const result=arr.map((row,i)=>{let n,dog,handler;if(row.length>=3){n=Number(row[0]);dog=row[1];handler=row.slice(2).join(' ');}else if(row.length===2){n=i+1;dog=row[0];handler=row[1];}else throw Error(`Row ${i+1} needs a dog and handler.`);if(!Number.isInteger(n)||n<1||n>99999)throw Error(`Row ${i+1} has an invalid run number.`);if(seen.has(n))throw Error(`Duplicate run number #${n}.`);if(!dog)throw Error(`Row ${i+1} is missing a dog name.`);seen.add(n);return {num:n,dog:String(dog).slice(0,100),handler:String(handler||'').slice(0,100)};});return result;}
+function applyRoster(newRoster){
+ if(!newRoster.length)throw Error('Roster cannot be empty.');
+ const trial=currentTrial();if(!confirm(`Replace the shared master running order for ${trial.name} (${trial.days.length} trial day${trial.days.length===1?'':'s'})? Existing dispatches for unchanged dogs will be retained.`))return;
+ // Reconcile imports by dog/handler first, then by unique dog name. Never
+ // use the editable run number as an internal ID. Replaced teams get new IDs.
+ const previous=trial.roster;
+ const unused=new Set(previous.map(t=>String(t.id)));
+ const resolved=newRoster.map(item=>({...item,id:item.id?String(item.id):''}));
+ // Explicit stable ID wins (e.g., Add team / already edited roster).
+ for(const t of resolved)if(t.id&&unused.has(t.id))unused.delete(t.id);
+ const pick=(t,predicate)=>{const matches=previous.filter(p=>unused.has(p.id)&&predicate(p,t));return matches.length===1?matches[0]:null;};
+ for(const t of resolved)if(!t.id){const p=pick(t,(p,v)=>p.dog.trim().toLowerCase()===v.dog.trim().toLowerCase()&&p.handler.trim().toLowerCase()===v.handler.trim().toLowerCase());if(p){t.id=p.id;unused.delete(p.id);}}
+ for(const t of resolved)if(!t.id){const p=pick(t,(p,v)=>p.dog.trim().toLowerCase()===v.dog.trim().toLowerCase());if(p){t.id=p.id;unused.delete(p.id);}}
+ for(const t of resolved)if(!t.id)t.id=newTeamId(previous.concat(resolved.filter(x=>x.id)));
+ const assignedIds=resolved.map(t=>t.id);
+ if(new Set(assignedIds).size!==resolved.length)throw Error('Imported roster has duplicate team IDs.');
+ const nums=resolved.map(t=>t.num);
+ if(nums.some(n=>!Number.isInteger(n)||n<1||n>99999)||new Set(nums).size!==nums.length)throw Error('Roster has invalid or repeated run numbers.');
+ const allowed=new Set(assignedIds);
+ trial.roster=resolved;roster=resolved;
+ for(const day of trial.days){
+  day.roster=resolved;
+  for(const run of day.searches){
+   run.sent=run.sent.filter(x=>allowed.has(x));run.dropped=run.dropped.filter(x=>allowed.has(x));run.queue=run.queue.filter(x=>allowed.has(x));run.staged=(run.staged||[]).filter(x=>allowed.has(x));if(run.firstStageId&&!allowed.has(run.firstStageId))run.firstStageId=null;if(run.queue.length)run.done=false;
+   const tracked=new Set([...run.sent,...run.dropped,...run.queue]);
+   for(const team of resolved)if(!tracked.has(team.id))run.queue.push(team.id);
+   if(!allowed.has(run.startId))run.startId=resolved[0].id;
+  }
+  day.subscribed=new Set([...day.subscribed].filter(x=>allowed.has(x)));
+  day.inboxes=Object.fromEntries(Object.entries(day.inboxes||{}).filter(([id])=>allowed.has(id)));
+ }
+ if(!allowed.has(state.selected))state.selected=resolved[0].id;
+ state.showExtra={};state.editTeam=null;log(`Updated shared master order (${resolved.length} teams) across ${trial.days.length} day(s), preserving existing dispatch history`);
+ ensureInbox(state.selected);render();
+}
+function downloadBlob(name,text,mime){const blob=new Blob([text],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportSetup(){const data={version:7,events:state.events,trials:state.trials.map(t=>({name:t.name,type:t.type,session:t.session,eventId:t.eventId,roster:t.roster,days:t.days.map(d=>({...d,pairs:d.pairs||[],subscribed:[...d.subscribed]}))})),trial:state.trial,day:state.day,selected:state.selected};downloadBlob('nosework-run-board-v13-1-backup.json',JSON.stringify(data,null,2),'application/json');}
+function importSetup(text){if(state.role!=='admin')return;const input=JSON.parse(text);if(![1,2,3,4,5,6,7].includes(input.version)||!Array.isArray(input.trials)||!input.trials.length||input.trials.length>100)throw Error('Unsupported backup structure.');const trials=input.trials.map(t=>{if(typeof t.name!=='string'||!Array.isArray(t.days)||!t.days.length||t.days.length>100)throw Error('Trial/day data is invalid.');return {name:t.name.slice(0,100),roster:null,type:TRIAL_TYPES.includes(t.type)?t.type:trialTypeOf(t),session:SESSION_CHOICES.includes(t.session)?t.session:'All Day',eventId:typeof t.eventId==='string'?t.eventId:'imported',days:t.days.map(d=>{if(!Array.isArray(d.roster)||!d.roster.length||d.roster.length>500||!Array.isArray(d.searches))throw Error('A day has invalid roster/search data.');const rr=d.roster.map(x=>({id:String(x.id),num:Number(x.num),dog:String(x.dog).slice(0,100),handler:String(x.handler).slice(0,100)}));const unique=new Set(rr.map(x=>x.id));if(rr.some(x=>!x.id.trim()||x.id.length>100||!x.dog||!Number.isInteger(x.num)||x.num<1||x.num>99999)||unique.size!==rr.length||new Set(rr.map(x=>x.num)).size!==rr.length)throw Error('A roster contains invalid or duplicate teams.');const ss=d.searches.map(s=>{const startId=String(s.startId||rr[0].id);const ids=new Set(rr.map(x=>x.id));const cleaned=k=>Array.isArray(k)?k.map(String).filter(x=>ids.has(x)):[];const queue=cleaned(s.queue),sent=cleaned(s.sent),dropped=cleaned(s.dropped);if(new Set([...queue,...sent,...dropped]).size!==queue.length+sent.length+dropped.length)throw Error('The queue backup contains duplicate teams.');return {name:String(s.name||'Search').slice(0,100),customName:typeof s.customName==='boolean'?s.customName:true,staged:cleaned(s.staged),firstStageId:ids.has(String(s.firstStageId))?String(s.firstStageId):null,done:!!s.done,element:String(s.element||'').slice(0,20),elementLocked:!!s.elementLocked,selectable:!!s.selectable,startId,queue,sent,dropped,count:Math.max(1,Math.min(10,Number(s.count)||4)),active:!!s.active,log:Array.isArray(s.log)?s.log.slice(0,100):[]};});return {date:String(d.date||''),label:String(d.label||'Day').slice(0,100),pairs:Array.isArray(d.pairs)?d.pairs.filter(p=>Array.isArray(p)&&p.length===2&&p.every(i=>Number.isInteger(i)&&i>=0&&i<ss.length)&&p[0]!==p[1]):[],session:SESSION_CHOICES.includes(d.session)?d.session:'All Day',roster:rr,searches:ss,hold:!!d.hold,subscribed:new Set(Array.isArray(d.subscribed)?d.subscribed.map(String).filter(x=>unique.has(x)):[]),inboxes:typeof d.inboxes==='object'&&d.inboxes&&!Array.isArray(d.inboxes)?d.inboxes:{},activity:Array.isArray(d.activity)?d.activity.slice(0,100):[]};})};});for(let i=0;i<trials.length;i++){const trial=trials[i],data=input.trials[i];const raw=Array.isArray(data.roster)?data.roster:trial.days[0].roster;trial.roster=raw.map(x=>({id:String(x.id),num:Number(x.num),dog:String(x.dog).slice(0,100),handler:String(x.handler).slice(0,100)}));trial.days.forEach(day=>day.roster=trial.roster);}if(!confirm('Replace all local demo trials with the setup backup?'))return;state.events=Array.isArray(input.events)&&input.events.length?input.events.filter(e=>e&&typeof e.name==='string'&&typeof e.id==='string').map(e=>({id:e.id.slice(0,100),name:e.name.slice(0,100)})):[{id:'imported',name:'Imported event'}];for(const t of trials){if(!state.events.some(e=>e.id===t.eventId))t.eventId=state.events[0].id;}state.trials=trials;state.adminEventId=state.trials[0].eventId;state.adminTrialChosen=true;state.trial=Math.min(Math.max(0,Number(input.trial)||0),trials.length-1);state.day=Math.min(Math.max(0,Number(input.day)||0),currentTrial().days.length-1);state.selected=String(input.selected||'');switchDay();state.tab='admin';state.adminSection='events';state.adminEventId=currentTrial().eventId;state.adminTrialChosen=true;state.showFullRoster=false;render();}
+function setupAction(action,i){if(state.role!=='admin')return;const val=id=>document.getElementById(id)?.value?.trim()||'';const s=state.trials.length?state.searches[i]:undefined;try{if(action==='renameEvent'){const name=val('editEventName');if(!name)throw Error('Enter an event name.');const e=state.events.find(x=>x.id===state.adminEventId);if(!e)throw Error('Select an event.');e.name=name;}
+else if(action==='addEvent'){const name=val('newEventName');if(!name)throw Error('Enter an event name.');const id='event'+Date.now()+'-'+state.events.length;state.events.push({id,name});state.adminEventId=id;state.adminTrialChosen=false;state.adminSection='events';state.deleteEventPending=null;}
+else if(action==='requestDeleteEvent'){
+ const event=state.events.find(e=>e.id===state.adminEventId);if(!event)throw Error('Select an event to delete.');
+ state.deleteEventPending=event.id;
+}
+else if(action==='cancelDeleteEvent'){state.deleteEventPending=null;}
+else if(action==='confirmDeleteEvent'){
+ const event=state.events.find(e=>e.id===state.adminEventId);
+ if(!event||state.deleteEventPending!==event.id)throw Error('Start event deletion again.');
+ if(val('deleteEventName')!==event.name)throw Error('Enter the exact event name to confirm deletion.');
+ const count=eventTrialIndices(event.id).length;
+ if(!confirm(`FINAL CONFIRMATION: Permanently delete “${event.name}” and ${count} trial${count===1?'':'s'}, including all days, runs, rosters, staging and dispatch history? This cannot be undone in this demo except by restoring a backup.`))return;
+ state.trials=state.trials.filter(t=>t.eventId!==event.id);
+ state.events=state.events.filter(e=>e.id!==event.id);
+ state.deleteEventPending=null;state.day=0;state.trial=0;state.adminTrialChosen=!!state.trials.length;
+ if(state.trials.length){state.adminEventId=state.trials[0].eventId;switchDay();}
+ else {state.adminEventId=state.events[0]?.id||'';roster=participants.map((p,i)=>({id:String(i+1),num:i+1,dog:p[0],handler:p[1]}));state.selected='';}
+ state.adminSection='events';state.tab='admin';
+}
+
+else if(action==='renameTrial'){if(!val('editTrialName'))throw Error('Enter a trial name.');currentTrial().name=val('editTrialName');}
+else if(action==='addTrial'){const type=val('newTrialType')||'NW1';if(!TRIAL_TYPES.includes(type))throw Error('Choose a valid trial type.');const date=val('newTrialDate'),session=val('newTrialSession');if(!/^\d{4}-\d{2}-\d{2}$/.test(date))throw Error('Choose the trial date.');if(!SESSION_CHOICES.includes(session))throw Error('Choose AM, PM or All Day.');const event=state.events.find(x=>x.id===state.adminEventId);if(!event)throw Error('Select an event first.');const name=val('newTrialName')||`${type} · Trial ${eventTrialIndices(event.id).length+1}`;const master=roster.map(d=>({...d}));const first=blankDay(date,type==='Summit'?'Day 1':`${session} session`,type,session);first.roster=master;const days=[first];if(type==='Summit'){const second=blankDay(nextDate(date),'Day 2',type,session);second.roster=master;days.push(second);}state.trials.push({name,type,session,eventId:event.id,roster:master,days});state.trial=state.trials.length-1;state.day=0;state.adminTrialChosen=true;switchDay();}
+else if(action==='renameDay'){if(!val('editDayName'))throw Error('Enter a day label.');currentDay().label=val('editDayName');const date=val('editDayDate')||currentDay().date;if(currentTrial().days.some(d=>d!==currentDay()&&d.date===date))throw Error('That trial already has a day on this date.');currentDay().date=date;}
+else if(action==='addDay'){if(currentTrial().type==='Summit'&&currentTrial().days.length>=2)throw Error('Summit always has two days; edit their dates instead.');const date=val('newDayDate')||currentDay().date;if(currentTrial().days.some(x=>x.date===date))throw Error('This trial already has a day on that date.');currentTrial().days.push(blankDay(date,`Day ${currentTrial().days.length+1}`,currentTrial().type||'Custom',currentTrial().session||'All Day'));state.day=currentTrial().days.length-1;switchDay();}
+else if(action==='addSearch'){if(state.searches.length>=20)throw Error('Maximum 20 searches per day.');const index=state.searches.length;const type=currentTrial().type||'Custom';let r;if(['NW1','NW2','NW3'].includes(type))r=templateRun('',index,true);else if(/^L[123][EIVC]$/.test(type)){r=templateRun(TYPE_TO_ELEMENT[type.slice(-1)],index);r.name=`${r.element} ${index+1}`;}else if(type==='ORT'){r=templateRun('Container',index);r.name=`Container ${index+1}`;}else{r=search(`Run ${index+1}`,roster[0]?.id||'1',4,type!=='Custom');r.element='';r.elementLocked=false;r.selectable=false;}r.staged=[];r.firstStageId=null;r.done=false;r.customName=false;state.searches.push(r);refreshDefaultNames(state.searches);}
+else if(action==='deckMinus'||action==='deckPlus'){s.count=Math.max(1,Math.min(10,s.count+(action==='deckPlus'?1:-1)));}
+else if(action==='markRunDone'){
+ const indices=pairedRunIndex(i)||[i];if(indices.some(k=>!runOrderComplete(state.searches[k])))throw Error('Complete the run order before marking Done.');
+ if(!confirm(`Has the LAST dog actually finished ${indices.map(k=>state.searches[k].name).join(' + ')}? Mark these run${indices.length===1?'':'s'} Done?`))return;
+ for(const k of indices)state.searches[k].done=true;
+ log(`Administrator marked ${indices.map(k=>state.searches[k].name).join(' + ')} Done after final dog finished`);
+}
+else if(action==='reopenDone'){
+ const indices=pairedRunIndex(i)||[i];if(!confirm(`Reopen ${indices.map(k=>state.searches[k].name).join(' + ')} for corrections?`))return;
+ for(const k of indices)state.searches[k].done=false;
+ log(`Administrator reopened ${indices.map(k=>state.searches[k].name).join(' + ')}`);
+}
+else if(action==='toggleActive'){const target=pairedRunIndex(i)||[i];const enabled=!s.active;for(const k of target){const run=state.searches[k];if(enabled&&run.selectable&&!run.element)throw Error(`Choose an element for ${run.name} before activating.`);run.active=enabled;}log(`${target.map(k=>state.searches[k].name).join(' + ')}: ${enabled?'activated':'deactivated'}`);}
+ else if(action==='saveActiveRuns'){
+   const selected=state.searches.map((r,index)=>document.getElementById('runEnabled-'+index)?.checked??r.active);
+   for(const pair of currentDay().pairs||[])selected[pair[1]]=selected[pair[0]];
+   selected.forEach((active,index)=>{const r=state.searches[index];if(active&&r.selectable&&!r.element)throw Error(`Choose an element for ${r.name} before activating.`);});
+   const changed=[];
+   state.searches.forEach((r,index)=>{if(r.active!==selected[index]){r.active=selected[index];changed.push(`${r.name} ${r.active?'active':'inactive'}`);}});
+   if(changed.length)log(`Administrator updated active runs: ${changed.join('; ')}`);
+   if(!state.searches[state.gateRunIndex]?.active)state.gateRunIndex=Math.max(0,state.searches.findIndex(r=>r.active));
+ }
+
+else if(action==='saveSearch'){const name=val('searchName-'+i);if(!name)throw Error('Enter a search name.');const startId=val('searchStart-'+i);if(startId!==s.startId&&!(confirm(`Change the starting dog for ${s.name}? All dispatch history for this search will reset.`)))return;const count=Number(document.getElementById('searchCount-'+i)?.value??s.count);if(!Number.isInteger(count)||count<1||count>10)throw Error('On-deck dogs must be from 1 to 10.');const enabled=s.active;const newElement=s.selectable?(document.getElementById('runElement-'+i)?.value||''):s.element;if(s.selectable&&newElement&&!ELEMENTS.includes(newElement))throw Error('Select a valid run element.');if(s.selectable&&!newElement&&enabled)throw Error('Choose an element before activating this run.');const wasDefault=!s.customName&&name===s.name;s.customName=wasDefault?false:(name!==s.name?true:!!s.customName);s.name=name;s.element=newElement;s.count=count;refreshDefaultNames(state.searches);if(s.active!==enabled){s.active=enabled;log(`${s.name}: ${enabled?'activated':'deactivated'}`);}const pair=pairedRunIndex(i);if(pair){for(const k of pair)state.searches[k].active=enabled;}if(startId!==s.startId){const target=pairedRunIndex(i)||[i];for(const k of target){const run=state.searches[k];run.startId=startId;run.queue=startQueue(startId);run.sent=[];run.dropped=[];run.staged=[];run.firstStageId=null;run.done=false;run.log=[];}log(`${s.name}: starting dog set to ${plain(startId)}; paired queue reset when applicable`);} }
+else if(action==='resetRunName'){s.customName=false;refreshDefaultNames(state.searches);log(`Run ${i+1} name reset to ${s.name}`);}
+else if(action==='pairRuns'){
+ const a=Number(val('pairRunA')),b=Number(val('pairRunB'));if(!Number.isInteger(a)||!Number.isInteger(b)||a===b||!state.searches[a]||!state.searches[b])throw Error('Choose two different runs.');
+ if((currentDay().pairs||[]).some(p=>p.includes(a)||p.includes(b)))throw Error('A run can belong to only one back-to-back pair.');
+ const first=state.searches[a],second=state.searches[b];
+ if([first,second].some(r=>r.sent.length||r.dropped.length||r.done||r.firstStageId))throw Error('Pair runs before dispatch. Reset both queues first if needed.');const pairingActive=first.active||second.active;if(pairingActive&&[first,second].some(r=>r.selectable&&!r.element))throw Error('Choose and save any missing run elements before pairing active runs.');
+ if(!confirm(`Pair ${first.name} → ${second.name} back-to-back for this day? Both runs will be ${pairingActive?'active':'inactive'} and share the first run's starting dog and queue.`))return;
+ second.queue=[...first.queue];second.sent=[...first.sent];second.dropped=[...first.dropped];second.startId=first.startId;first.active=pairingActive;second.active=pairingActive;second.staged=[...(first.staged||[])];second.firstStageId=first.firstStageId||null;second.done=first.done;
+ (currentDay().pairs??=[]).push([a,b]);log(`Administrator paired Run ${a+1} → Run ${b+1} back-to-back`);
+ }
+else if(action==='unpairRuns'){const pair=(currentDay().pairs||[])[i];if(!pair)throw Error('Pair not found.');currentDay().pairs.splice(i,1);log(`Administrator unpaired Runs ${pair[0]+1} and ${pair[1]+1}`);}
+else if(action==='resetSearch'){if(!confirm(`Reset the dispatch queue for ${s.name}${pairedRunIndex(i)?' and its paired run':''}?`))return;const target=pairedRunIndex(i)||[i];for(const k of target){const run=state.searches[k];resetRunExecution(run,s.startId);}log(`${s.name}: queue reset${target.length===2?' for back-to-back pair':''}`);}
+else if(action==='removeSearch'){if(!confirm(`Remove search ${s.name} from this demo day?`))return;state.searches.splice(i,1);refreshDefaultNames(state.searches);currentDay().pairs=(currentDay().pairs||[]).filter(pair=>!pair.includes(i)).map(pair=>pair.map(k=>k>i?k-1:k));}
+else if(action==='addTeam'){const num=Number(val('addRun')),dog=val('addDog'),handler=val('addHandler');if(!Number.isInteger(num)||num<1||num>99999||!dog)throw Error('Enter a valid run number and dog name.');if(roster.some(d=>d.num===num))throw Error('That run number is already used.');applyRoster([...roster,{id:newTeamId(),num,dog,handler}]);return;}
+else if(action==='importPaste'){applyRoster(parseRosterText(val('rosterPaste')));return;}
+else if(action==='export'){exportSetup();return;}
+render();}catch(e){alert(e.message);}}
+
+function aboutView(){return `<div class="helpgrid"><section class="panel"><h2>What the recipient can try</h2><p style="margin-top:10px">1. Open <b>My dog + SMS</b> and select a sample competitor.</p><p style="margin-top:9px">2. Press <b>Text STATUS</b> to see an automatic reply covering each active search.</p><p style="margin-top:9px">3. Switch to <b>Steward → Gate Steward</b> to work on one run. Switch to <b>Parking Lot Steward</b> to see the on-deck dogs; after each gate send, the next parking-lot call becomes available.</p><p style="margin-top:9px">4. Choose <b>Admin</b> in the mode switcher, then open <b>Admin → Event & trials → Runs</b> to create trials and days, import a CSV roster, edit run starts and on-deck counts.</p><p style="margin-top:9px">5. Set a <b>Weather hold</b> under Admin to simulate an alert. Test STOP and START.</p><div class="steps"><button class="primary" data-tab="admin">Open Admin</button><button data-tab="board">Try dispatching</button></div></section><section class="panel"><h2>What's real—and what isn't</h2><p class="small muted" style="margin-top:10px"><b>Real in this file:</b> locally editable Event → Trial → Run/day setup, CSV roster import, queue logic, independent search orders, position calculations, simulated SMS commands and generated alerts, weather holds, staging, skip/move/drop/restore actions, editable run names and paired runs.</p><p class="small muted" style="margin-top:11px"><b>Not connected:</b> Bluehost hosting, real SMS, carrier coverage, authentication, shared database, cross-device synchronization, billing and delivery receipts.</p><p class="small muted" style="margin-top:11px">This is one HTML file. It works offline. Changes are in memory unless you export and restore a JSON backup. The fictional roster is included for demonstration only.</p></section></div>`;}
+
+// v4: focused administration pages. All actions remain in the administrator role.
+const adminSections=[
+ ['overview','Overview'],['events','Event & trials'],['searches','Runs'],
+ ['roster','Running order'],['backup','Backup & reset']
+];
+function adminNavigation(){
+ return `<nav class="admin-pages" aria-label="Administrator pages">${adminSections.map(([id,name])=>
+ `<button type="button" data-admin-section="${id}" class="${state.adminSection===id?'selected':''}" aria-current="${state.adminSection===id?'page':'false'}">${name}</button>`).join('')}</nav>`;
+}
+function adminOverviewV4(){
+ const searches=state.searches;
+ const totalSent=searches.reduce((n,s)=>n+s.sent.length,0);
+ const open=searches.reduce((n,s)=>n+s.queue.length,0);
+ const active=searches.filter(s=>s.active).length;
+ return `${adminActiveRunsV10()}<div class="admin-overview">
+  <section class="panel admin-primary">
+    <div class="sectionhead"><div><h3>Trial-day status</h3><p>${escapeHTML(currentTrial().name)} · ${escapeHTML(currentDay().date)}</p></div></div>
+    <div class="admin-summary">
+      <div class="metricbox"><strong>${active}<span> / ${searches.length}</span></strong><small>Active searches</small></div>
+      <div class="metricbox"><strong>${open}</strong><small>Queued positions across searches</small></div>
+      <div class="metricbox"><strong>${totalSent}</strong><small>Dispatches recorded</small></div>
+    </div>
+    <div class="admin-hold ${state.hold?'is-hold':''}"><div><strong>${state.hold?'Weather hold active':'Dispatch is enabled'}</strong><p>${state.hold?'All searches are paused; queues are unchanged.':'Gate stewards may dispatch dogs on active searches.'}</p></div>
+      <button type="button" class="${state.hold?'primary':'warn'}" data-action="${state.hold?'resume':'hold'}">${state.hold?'Lift weather hold':'Set weather hold'}</button></div>
+    <div class="admin-quick"><button class="primary" data-tab="board">Open running board</button><button data-admin-section="searches">Manage runs</button><button data-admin-section="roster">View running order</button></div>
+  </section>
+  <section class="panel"><h3>Recent activity</h3><p class="muted small admin-intro">Updates in this browser for this trial day.</p>
+   <div class="log" aria-live="polite">${state.activity.length?state.activity.slice(0,12).map(x=>`<div class="logentry"><small>${escapeHTML(x.at)}</small><div>${escapeHTML(x.text)}</div></div>`).join(''):'<p class="small muted">No activity recorded for this day.</p>'}</div>
+  </section></div>
+  ${scheduleAdminView()}
+  <p class="admin-footnote">Offline demo only. SMS messages, security, and shared synchronization are not connected to real services.</p>`;
+}
+function adminEventsV6(){
+ const e=state.events.find(x=>x.id===state.adminEventId)||currentEvent();
+ const indices=eventTrialIndices(e.id);
+ const chosen=state.adminTrialChosen&&currentTrial().eventId===e.id?currentTrial():null;
+ const d=chosen?currentDay():null;
+ return `<div class="admin-flow">
+ <section class="panel"><div class="admin-step-title"><div><span class="eyebrow">Step 1</span><h3>Your events</h3></div><span class="admin-count">${state.events.length} events</span></div>
+ <p class="muted small">Select an event to see its trials, or add another event.</p>
+ <div class="admin-choice-list">${state.events.map(ev=>`<button type="button" class="admin-choice ${e.id===ev.id?'selected':''}" data-admin-event="${escapeHTML(ev.id)}"><span><strong>${escapeHTML(ev.name)}</strong><small>${eventTrialIndices(ev.id).length} trials</small></span><span aria-hidden="true">›</span></button>`).join('')}</div>
+ <div class="admin-create-form"><h4>Add a new event</h4><label for="newEventName">Event name</label><input id="newEventName" maxlength="100" placeholder="e.g., Front Range Nose Work Weekend"><button class="primary" data-setup="addEvent">Add Event</button></div>
+ <div class="admin-inline-fields"><div><label for="editEventName">Rename selected event</label><input id="editEventName" maxlength="100" value="${escapeHTML(e.name)}"></div><button class="primary" style="align-self:end" data-setup="renameEvent">Save event name</button></div>
+ <div class="event-delete-zone"><h4>Delete this event</h4><p class="muted small">Deleting this event also removes all ${indices.length} of its trials, their runs, master running orders, staging and dispatch history. Export a backup first if needed.</p>
+ ${state.deleteEventPending===e.id?`<p class="small"><strong>Confirmation 1 of 2:</strong> Type the exact event name below, then press Continue to the final confirmation.</p><label for="deleteEventName">Type “${escapeHTML(e.name)}” to confirm</label><input id="deleteEventName" autocomplete="off" spellcheck="false" aria-label="Type exact event name to confirm deletion"><div class="delete-actions"><button class="danger-light" data-setup="confirmDeleteEvent">Continue to final confirmation</button><button data-setup="cancelDeleteEvent">Cancel</button></div>`:`<button class="danger-light" data-setup="requestDeleteEvent">Delete event…</button>`}
+ </div></section>
+ <section class="panel"><div class="admin-step-title"><div><span class="eyebrow">Step 2</span><h3>Trials in ${escapeHTML(e.name)}</h3></div><span class="admin-count">${indices.length} trials</span></div>
+ <p class="muted small">Choose a trial to show its runs. Several trials can share a date.</p>
+ <div class="admin-choice-list">${indices.map(i=>{const t=state.trials[i];return `<button type="button" class="admin-choice ${chosen===t?'selected':''}" data-admin-trial="${i}"><span><strong>${escapeHTML(t.name)}</strong><small>${escapeHTML(t.type||'Custom')} · ${niceTrialDate(t.days[0])} · ${t.days[0].searches.length} runs</small></span><span aria-hidden="true">›</span></button>`;}).join('')||'<p class="muted">No trials yet. Add the first trial below.</p>'}</div>
+ <div class="admin-create-form"><h4>Add a new trial</h4><div class="admin-create-fields"><div><label for="newTrialName">Trial name (optional)</label><input id="newTrialName" maxlength="100" placeholder="Auto-named if left blank"></div><div><label for="newTrialType">Trial type</label><select id="newTrialType">${optionsForTypes()}</select></div><div><label for="newTrialDate">Day</label><input id="newTrialDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div><label for="newTrialSession">Session</label><select id="newTrialSession">${sessionOptions()}</select></div></div>
+ <p class="admin-template-note"><strong>NW1 / NW2 / NW3:</strong> Automatically create 4 / 5 / 6 runs. The first four are Exterior, Interior, Vehicle, and Container in that order; any extra NW2/NW3 runs need their elements assigned.<br><strong>L1 / L2 / L3 specialty trials:</strong> Automatically create four runs of the chosen specialty element (e.g., L2C creates Container 1–4). ORT creates 3 Container runs. Elite creates 3 runs; Elite S and Elite P create 4. Elite and Summit have no elements. Summit creates one two-day trial with separately configured runs. Pair two runs in Admin → Runs to make them back-to-back.</p>
+ <button class="primary" data-setup="addTrial">Add Trial and Create Runs</button></div></section>
+ ${chosen?`<section class="panel"><div class="admin-step-title"><div><span class="eyebrow">Step 3</span><h3>Runs in ${escapeHTML(chosen.name)}</h3></div><span class="admin-count">${d.searches.length} runs</span></div>
+ <p class="muted small">${niceTrialDate(d)}. Runs belong only to this trial and day. Administrator can configure them; Steward controls the running order.</p>
+ <div class="admin-run-list">${d.searches.map((run,i)=>`<div class="run-list-row"><div><strong>${i+1}. ${escapeHTML(run.name)}</strong><span>${run.selectable&&!run.element?'Element not chosen · ':run.element?escapeHTML(run.element)+' · ':''}${run.active?'Active':'Inactive'} · ${run.queue.length} queued${pairLabel(i)?' · '+escapeHTML(pairLabel(i)):''}</span></div><button data-admin-section="searches">Edit</button></div>`).join('')||'<p class="muted">No runs added yet.</p>'}</div>
+ <div class="admin-quick"><button data-setup="addSearch" class="primary">Add Run</button><button data-admin-section="searches">Edit All Runs</button></div>
+ <div class="admin-divider"></div><div class="admin-date-fields"><div><label for="editDayName">Day label</label><input id="editDayName" value="${escapeHTML(d.label)}" maxlength="100"></div><div><label for="editDayDate">Day date</label><input id="editDayDate" type="date" value="${escapeHTML(d.date)}"></div></div>
+ <button data-setup="renameDay">Save day details</button><div class="formrow" style="margin-top:12px"><div><label for="newDayDate">Add another day to this trial</label><input id="newDayDate" type="date" value="${escapeHTML(d.date)}"></div><button data-setup="addDay">Add trial day</button></div>
+ ${chosen.days.length>1?`<p class="muted small">Switch days: ${chosen.days.map((day,i)=>`<button class="sm" data-admin-day="${i}">${niceTrialDate(day)}</button>`).join(' ')}</p>`:''}
+ </section>`:'<section class="panel"><p class="muted">Select a trial above to see and edit its runs.</p></section>'}
+ </div>`;
+}
+function adminRosterV4(){const count=roster.length,rows=state.showFullRoster?roster:roster.slice(0,12);return `
+ <section class="panel"><div class="sectionhead"><div><h3>Competitor running order <span class="admin-count">${count} teams</span></h3><p>Administrator owns one shared master roster for ${escapeHTML(currentTrial().name)} across all its trial days. Steward only adjusts dispatch order inside configured runs.</p></div></div>
+  <div class="roster-table-wrap"><table class="roster-table"><thead><tr><th scope="col">Run #</th><th scope="col">Dog</th><th scope="col">Handler</th><th scope="col">Edit</th></tr></thead><tbody>${rows.map(x=>`<tr><td>#${x.num}</td><td>${escapeHTML(x.dog)}</td><td>${escapeHTML(x.handler)}</td><td><button class="sm" data-edit-team="${escapeHTML(x.id)}" aria-label="Edit dog #${x.num}">Edit</button></td></tr>`).join('')}</tbody></table></div>
+  ${state.editTeam?editRosterTeamV5():''}
+  ${count>12?`<button class="admin-more" data-admin-roster="toggle">${state.showFullRoster?'Show fewer teams':`Show all ${count} teams`}</button>`:''}
+ </section>
+ <div class="admin-dual admin-block-gap">
+ <section class="panel"><h3>Import a running order</h3><p class="muted small admin-intro">Paste spreadsheet rows or select a CSV/TSV file. Columns: run number, dog, handler. Importing replaces this trial's single shared roster. Existing dispatch history for unchanged dogs is preserved.</p>
+ <label for="rosterPaste">Roster rows</label><textarea id="rosterPaste" rows="5" placeholder="Run,Dog,Handler\n1,Atlas,Morgan\n2,Fern,Lee"></textarea>
+ <div class="admin-quick"><button data-setup="importPaste" class="primary">Import pasted rows</button><label for="rosterFile" class="filelabel">Choose CSV/TSV</label><input id="rosterFile" class="hidden-file" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values"></div>
+ <p class="muted small admin-intro">Excel files must be saved as CSV first. No file is uploaded to a server.</p></section>
+ <section class="panel"><h3>Add one team</h3><p class="muted small admin-intro">Adding a team updates the shared roster across all days. Confirm before applying.</p>
+ <div class="settings-col"><div class="admin-add-team"><div><label for="addRun">Run #</label><input type="number" id="addRun" min="1" max="99999" value="${Math.max(0,...roster.map(x=>x.num))+1}"></div><div><label for="addDog">Dog</label><input id="addDog" maxlength="100" placeholder="Name"></div><div><label for="addHandler">Handler</label><input id="addHandler" maxlength="100" placeholder="Name"></div></div><button data-setup="addTeam" class="primary admin-align">Add team to order</button></div></section>
+ </div>`;}
+function editRosterTeamV5(){
+ if(state.role!=='admin')return '';
+ const t=byId(state.editTeam);if(!t)return '';
+ return `<form class="admin-edit-team" id="adminTeamForm"><h3>Edit competitor #${t.num}</h3><p class="muted small">Updates this trial's shared roster on all days without clearing the running queues. Run numbers may change without changing this dog’s internal ID, queue position, staging call or dispatch history.</p><div class="admin-add-team"><div><label for="teamEditNumber">Run #</label><input id="teamEditNumber" type="number" min="1" max="99999" value="${t.num}" required></div><div><label for="teamEditDog">Dog</label><input id="teamEditDog" maxlength="100" value="${escapeHTML(t.dog)}" required></div><div><label for="teamEditHandler">Handler</label><input id="teamEditHandler" maxlength="100" value="${escapeHTML(t.handler)}"></div></div><div class="admin-quick"><button type="submit" class="primary">Save competitor</button><button type="button" data-cancel-team="1">Cancel</button></div></form>`;
+}
+function saveRosterTeamV5(){
+ if(state.role!=='admin')return;
+ const oldId=String(state.editTeam),t=byId(oldId);if(!t)throw Error('Competitor no longer exists.');
+ const num=Number(document.getElementById('teamEditNumber')?.value);
+ const dog=document.getElementById('teamEditDog')?.value.trim()||'';
+ const handler=document.getElementById('teamEditHandler')?.value.trim()||'';
+ if(!Number.isInteger(num)||num<1||num>99999||!dog)throw Error('Enter a valid run number and dog name.');
+ if(roster.some(d=>d.id!==oldId&&d.num===num))throw Error('That run number is already in use.');
+ // The stable t.id never changes when a run number changes.
+ // Queues, firstStageId, staged history and messages still reference this ID.
+ t.num=num;t.dog=dog;t.handler=handler;
+ roster.sort((a,b)=>a.num-b.num);currentTrial().days.forEach(day=>{day.roster=roster;});
+ state.editTeam=null;
+ log(`Administrator updated roster entry #${num} ${dog}`);
+ render();
+}
+function adminActiveRunsV10(){
+ const day=currentDay(),runs=state.searches,pairs=day.pairs||[],activeCount=runs.filter(r=>r.active).length;
+ const secondIndices=new Set(pairs.map(pair=>pair[1]));
+ const checkboxes=runs.map((r,i)=>{
+   if(secondIndices.has(i))return '';
+   const pair=pairedRunIndex(i),partner=pair?pair.find(k=>k!==i):null;
+   const pairName=partner===null?'':`${escapeHTML(runs[partner].name)}`;
+   const missingElement=(pair||[i]).some(k=>runs[k].selectable&&!runs[k].element);
+   const detail=pair?`Back-to-back pair · one switch activates both runs`:(missingElement?'Choose and save the element in Run configuration before activation':(r.active?'Currently active':'Currently inactive'));
+   const displayName=pair?`${escapeHTML(r.name)} → ${pairName}`:escapeHTML(r.name);
+   return `<label class="activation-item" for="runEnabled-${i}"><input id="runEnabled-${i}" type="checkbox" data-active-run="${i}" ${r.active?'checked':''} ${missingElement?'disabled':''}><span><span class="activation-name">${pair?'Pair':'Run '+(i+1)}: ${displayName}</span><span class="activation-detail">${detail}</span></span></label>`;
+ }).join('');
+ const available=runs.map((r,i)=>`<option value="${i}">${i+1}. ${escapeHTML(r.name)}</option>`).join('');
+ const paired=pairs.map((pair,i)=>`<div class="run-list-row"><span><strong>${escapeHTML(runs[pair[0]]?.name||'Run '+(pair[0]+1))} → ${escapeHTML(runs[pair[1]]?.name||'Run '+(pair[1]+1))}</strong><span>Back-to-back · ${runs[pair[0]]?.active?'active together':'inactive together'}</span></span><button data-setup="unpairRuns" data-idx="${i}">Unpair</button></div>`).join('');
+ return `<section class="run-activation-panel"><h3>Active runs — ${escapeHTML(currentTrial().name)}</h3><p class="small muted admin-intro">Select the runs operating on <strong>${escapeHTML(day.date)}</strong> and save. Only active runs appear on the Steward and My Dog boards. Back-to-back partners share a single checkbox and always activate or deactivate together.</p>
+ <div class="activation-summary">${activeCount} of ${runs.length} runs active · ${pairs.length} back-to-back pair${pairs.length===1?'':'s'}</div>
+ <div class="activation-list">${checkboxes||'<p>No runs yet. Add them in Admin → Runs.</p>'}</div>
+ <div class="activation-actions"><button type="button" class="primary" data-setup="saveActiveRuns" ${!runs.length?'disabled':''}>Save active runs</button><button type="button" class="soft" data-active-set="all" ${!runs.length?'disabled':''}>Select all configured</button><button type="button" class="soft" data-active-set="none" ${!runs.length?'disabled':''}>Select none</button></div>
+ <div class="pair-section"><h3>Finalize completed runs</h3><p class="small muted admin-intro">When the dispatch queue is empty, stewards see <strong>Run order complete</strong>. Once the final dog has actually finished, Administrator marks the run Done. Paired runs are confirmed together.</p>
+ <div class="admin-choice-list">${runs.map((r,i)=>{
+ if(secondIndices.has(i))return '';
+ const pair=pairedRunIndex(i),indices=pair||[i],isComplete=indices.every(k=>runOrderComplete(runs[k])),isDone=indices.every(k=>runs[k].done);
+ const display=indices.map(k=>runs[k].name).join(' → ');
+ return `<div class="run-list-row"><span><strong>${escapeHTML(display)}</strong><span>${isDone?'Done · final dog finished':isComplete?'Run order complete · awaiting final dog':'Running · dispatch order not yet complete'}</span></span><button data-setup="${isDone?'reopenDone':'markRunDone'}" data-idx="${i}" ${!isComplete?'disabled':''}>${isDone?'Reopen':'Mark Done'}</button></div>`;
+ }).join('')}</div></div>
+ <div class="pair-section"><h3>Back-to-back pairs (optional)</h3><p class="small muted admin-intro">Pair two runs on this trial day. If either run is currently active when paired, both become active. A paired dog completes both runs before the unit advances.</p>
+ <div class="formrow"><div><label for="pairRunA">First run</label><select id="pairRunA">${available}</select></div><div><label for="pairRunB">Second run</label><select id="pairRunB">${runs.map((r,i)=>`<option value="${i}" ${i===1?'selected':''}>${i+1}. ${escapeHTML(r.name)}</option>`).join('')}</select></div><button type="button" class="primary" data-setup="pairRuns" ${runs.length<2?'disabled':''}>Pair selected runs</button></div>
+ <div class="admin-choice-list">${paired||'<p class="small muted">No runs paired. All runs operate independently.</p>'}</div></div></section>`;
+}
+function adminSearchesV4(){return `<section class="panel"><div class="sectionhead"><div><h3>Run configuration <span class="admin-count">${state.searches.length} runs</span></h3><p>Event: ${escapeHTML(currentEvent().name)} · Trial: ${escapeHTML(currentTrial().name)} · Date: ${escapeHTML(currentDay().date)}.</p></div><button data-setup="addSearch" class="primary">Add run</button></div>
+ <p class="muted small admin-intro">Each run belongs to the selected trial within its event, and is scheduled for this trial day. Only Administrator can create or edit runs. Use Administrator → Overview to select active runs and configure back-to-back pairs. Gate stewards work on one selected run; parking lot stewards see active-run staging. Only Admin changes setup.</p>
+ <div class="admin-quick"><button data-admin-section="overview" class="primary">Set active runs & pairs on Overview</button></div>
+ <div class="admin-search-grid">${state.searches.map((s,i)=>`<article class="admin-search-card">
+ <div class="admin-search-heading"><h3>Run ${i+1}</h3><span class="admin-status ${s.active?'is-active':''}">${s.active?'Active':'Inactive'}</span></div>
+ <p class="muted small">${s.sent.length} sent · ${s.queue.length} waiting · ${s.dropped.length} dropped</p>
+ <div class="admin-search-fields"><div><label for="searchName-${i}">Run name (editable)</label><input id="searchName-${i}" maxlength="100" value="${escapeHTML(s.name)}"><p class="small muted" style="margin-top:5px">${s.customName?"Custom name":"Automatic: "+escapeHTML(defaultRunName(s,i,state.searches))}</p><button class="sm soft" data-setup="resetRunName" data-idx="${i}" type="button">Use default name</button></div>
+ <div><label for="searchStart-${i}">Starting dog</label><select id="searchStart-${i}">${options(s.startId||s.queue[0]||roster[0]?.id)}</select></div>
+ <div><label for="searchCount-${i}">On-deck dogs (1–10)</label><input id="searchCount-${i}" type="number" min="1" max="10" inputmode="numeric" value="${s.count}"></div>
+ ${s.elementLocked?`<div><label>Element (fixed by trial template)</label><strong class="admin-locked">${escapeHTML(s.element||s.name)}</strong></div>`:s.selectable?`<div><label for="runElement-${i}">Run element (required to activate)</label><select id="runElement-${i}"><option value="">Choose an element...</option>${ELEMENTS.map(v=>`<option value="${v}" ${s.element===v?'selected':''}>${v}</option>`).join('')}</select></div>`:''}
+  </div>
+ <div class="admin-search-actions"><button data-setup="saveSearch" data-idx="${i}" class="primary">Save run</button><div class="admin-low-actions"><button data-setup="resetSearch" data-idx="${i}" class="soft">Reset queue</button><button data-setup="removeSearch" data-idx="${i}" class="danger-light">Remove run</button></div></div>
+ </article>`).join('')||'<p class="muted">No runs configured for this trial day. Select Add run.</p>'}</div>
+ </section>`;}
+function adminBackupV4(){return `<div class="admin-dual">
+ <section class="panel"><h3>Save & restore</h3><p class="muted small admin-intro">This offline demo does not save automatically after the page is closed. Export a JSON backup to preserve all events, trials, day settings, running orders and progress.</p>
+ <div class="settings-col"><button data-setup="export" class="primary admin-align">Download JSON backup</button><label for="backupFile" class="filelabel admin-align">Restore a JSON backup</label><input id="backupFile" class="hidden-file" type="file" accept="application/json,.json"></div>
+ <p class="muted small admin-intro">Restoring replaces all current local demo data. Only open backups you trust.</p></section>
+ <section class="panel"><h3>Reset selected day</h3><p class="muted small admin-intro">Clears all dispatch progress, weather hold and simulated messages for the selected trial day. The trial setup and roster remain.</p>
+ <p class="admin-selected"><strong>${escapeHTML(currentTrial().name)}</strong><span>${escapeHTML(currentDay().date)} · ${escapeHTML(currentDay().label)}</span></p>
+ <button data-action="reset" class="danger-light admin-align">Reset day queues & messages</button></section>
+ </div>`;}
+function adminShellV4(){
+ const selected=adminSections.some(x=>x[0]===state.adminSection)?state.adminSection:'overview';
+ const desc={overview:'Trial day status and controls',events:'Choose an event, select a trial, then configure its runs',roster:'Manage the master competitor roster',searches:'Select active runs, optional pairs, and run settings',backup:'Export, restore or reset demo data'};
+ return `<div class="admin-header"><div><span class="eyebrow">Administrator · Event → Trial → Run</span><h2>${adminSections.find(x=>x[0]===selected)[1]}</h2><p>${desc[selected]}</p><div class="admin-breadcrumb"><span>Event: ${escapeHTML((selected==='events'?state.events.find(e=>e.id===state.adminEventId):currentEvent())?.name||currentEvent().name)}</span><span>Trial: ${escapeHTML(selected==='events'&&!state.adminTrialChosen?'Select a trial':currentTrial().name)}</span><span>Date: ${escapeHTML(currentDay().date)}</span></div></div></div>`+
+ adminNavigation()+
+ (selected==='overview'?adminOverviewV4():selected==='events'?adminEventsV6():selected==='roster'?adminRosterV4():selected==='searches'?adminSearchesV4():adminBackupV4());
+}
+
+function renderEmptyProject(){
+ document.body.dataset.theme=state.theme;
+ const e=state.events.find(x=>x.id===state.adminEventId)||state.events[0];
+ const selected=e?.id||'';
+ app.innerHTML=`<div class="hero"><div><div class="eyebrow">Nosework Run Board · local demo v10</div><h1>No trials configured</h1><p>Create an event and its first trial to start a new running board.</p></div></div>
+ <div class="notice">Offline prototype only. Deleted event data can be recovered only from an exported JSON backup.</div>${roleSwitcher()}
+ ${state.role==='admin'?`<div class="admin-header"><h2>Event & trial setup</h2><p>Start with an event, then add a trial and its run template.</p></div>
+ <section class="panel"><h3>Events</h3>${state.events.map(ev=>`<button class="admin-choice ${selected===ev.id?'selected':''}" data-admin-event="${escapeHTML(ev.id)}">${escapeHTML(ev.name)}</button>`).join('')||'<p class="muted small">No events remain.</p>'}
+ <div class="admin-create-form"><label for="newEventName">New event name</label><input id="newEventName" maxlength="100" placeholder="Event name"><button class="primary" data-setup="addEvent">Add event</button></div></section>
+ ${e?`<section class="panel" style="margin-top:14px"><h3>Create first trial in ${escapeHTML(e.name)}</h3><div class="admin-create-form"><label for="newTrialName">Trial name (optional)</label><input id="newTrialName" maxlength="100" placeholder="Default trial name"><div class="admin-create-fields"><div><label for="newTrialType">Trial type</label><select id="newTrialType">${optionsForTypes()}</select></div><div><label for="newTrialDate">Date</label><input id="newTrialDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div><label for="newTrialSession">Session</label><select id="newTrialSession">${sessionOptions()}</select></div></div><button class="primary" data-setup="addTrial">Create trial & runs</button></div></section>`:''}`:'<section class="panel"><h2>No active trial</h2><p class="muted">An administrator must create a trial first.</p></section>'}`;
+}
+function render(){if(!state.trials.length){renderEmptyProject();return;}if(state.role!=='admin'&&(state.tab==='admin'||state.tab==='setup'))state.tab='dog';document.body.dataset.theme=state.theme;const d=byId(state.selected);app.innerHTML=`<div class="hero"><div><div class="eyebrow">Nose work field operations · interactive prototype</div><h1>${state.role==='admin'?'Trial operations':'Running board'}</h1><p>${state.role==='admin'?'Configure trials and manage the running board.':'View the current running order by trial and search.'}</p></div><div class="status-pill ${state.hold?'hold':''}"><span class="dot"></span>${state.hold?'Weather hold':'Trial running · demo'}</div></div>${roleSwitcher()}${contextControls()}<div class="notice"><strong>Offline prototype</strong> · No live SMS or multi-device synchronization. Role switching is for demonstration only.</div><nav class="mainnav" aria-label="Demo sections"><button data-tab="dog" class="${state.tab==='dog'?'active':''}">My Dog</button><button data-tab="board" class="${state.tab==='board'?'active':''}">${state.role==='steward'?'Steward station':'Running board'}</button>${state.role==='admin'?`<button data-tab="admin" class="${['admin','setup'].includes(state.tab)?'active':''}">Admin</button>`:''}<button data-tab="about" class="${state.tab==='about'?'active':''}">Help</button></nav>${state.tab==='dog'?dogView():state.tab==='board'?(state.role==='steward'?stewardView():boardView()):['admin','setup'].includes(state.tab)?adminShellV4():aboutView()}<div class="footer">Offline demo · ${escapeHTML(currentEvent().name)} · ${escapeHTML(dayTitle())} · ${d?'dog: '+escapeHTML(d.dog):'no dog'} · role: ${escapeHTML(state.role)} · no WordPress</div>`;const c=document.getElementById('smsMessages');if(c)c.scrollTop=c.scrollHeight;}
+app.addEventListener('change',e=>{const el=e.target;if(el.id==='roleSelect'){state.role=el.value;state.tab=state.role==='admin'?'admin':state.role==='steward'?'board':'dog';render();return;}if(el.matches('[data-active-run]')&&state.role==='admin'){
+ const index=Number(el.dataset.activeRun),pair=pairedRunIndex(index);
+ if(pair)for(const other of pair){const linked=document.getElementById('runEnabled-'+other);if(linked)linked.checked=el.checked;}
+ return;
+ }if(el.id==='gateRunSelect'&&state.role==='steward'){const i=Number(el.value);if(state.searches[i]?.active)state.gateRunIndex=i;render();return;}if(el.id==='themeSelect'){state.theme=el.value==='outdoor'?'outdoor':'indoor';render();return;}if(el.id==='eventSelect'){const inds=eventTrialIndices(el.value);if(inds.length){selectTrialDay(inds[0],state.trials[inds[0]].days[0].date);state.adminEventId=el.value;state.adminTrialChosen=true;state.contextOpen=false;}render();return;}if(el.id==='dateSelect'){const inds=trialsOnDate(currentEvent().id,el.value);if(inds.length){selectTrialDay(inds[0],el.value);state.contextOpen=false;}render();return;}if(el.id==='trialSelect'){const index=Number(el.value);if(state.trials[index]){selectTrialDay(index,currentDay().date);state.adminEventId=currentTrial().eventId;state.adminTrialChosen=true;state.contextOpen=false;}render();return;}if(el.id==='watchDog'){state.selected=el.value;ensureInbox(state.selected);render();return;}if(el.id==='optin'){if(state.role==='viewer')return;state.subscribed[el.checked?'add':'delete'](state.selected);log(`${plain(state.selected)} ${el.checked?'subscribed':'unsubscribed'} via local checkbox`);if(el.checked)mockNotify(state.selected,`Alerts enabled for ${byId(state.selected).dog}. Reply STATUS for positions.`);render();return;}if(el.id==='rosterFile'&&el.files?.[0]&&state.role==='admin'){const r=new FileReader();r.onload=()=>{try{applyRoster(parseRosterText(r.result));}catch(err){alert(err.message);}};r.readAsText(el.files[0]);return;}if(el.id==='backupFile'&&el.files?.[0]&&state.role==='admin'){const r=new FileReader();r.onload=()=>{try{importSetup(r.result);}catch(err){alert(err.message);}};r.readAsText(el.files[0]);}});
+app.addEventListener('submit',e=>{if(e.target.id==='adminTeamForm'){e.preventDefault();try{saveRosterTeamV5()}catch(err){alert(err.message)}return;}if(e.target.id!=='smsForm')return;e.preventDefault();const input=document.getElementById('smsInput');receiveSMS(input?.value||'');render();});
+app.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.contextToggle){state.contextOpen=!state.contextOpen;render();return;}if(b.dataset.activeSet&&state.role==='admin'){
+ const enable=b.dataset.activeSet==='all';
+ document.querySelectorAll('[data-active-run]').forEach(input=>{input.checked=enable&&!input.disabled;});
+ return;
+ }if(b.dataset.adminEvent){if(state.role!=='admin')return;state.adminEventId=b.dataset.adminEvent;state.deleteEventPending=null;state.adminTrialChosen=false;state.adminSection='events';render();return;}if(b.dataset.adminTrial!==undefined){if(state.role!=='admin')return;const ti=Number(b.dataset.adminTrial);if(state.trials[ti]&&state.trials[ti].eventId===state.adminEventId){state.trial=ti;state.day=0;state.adminTrialChosen=true;switchDay();render();}return;}if(b.dataset.adminDay!==undefined){if(state.role!=='admin')return;const di=Number(b.dataset.adminDay);if(currentTrial().days[di]){state.day=di;switchDay();render();}return;}if(b.dataset.adminSection){if(state.role!=='admin')return;state.tab='admin';state.adminSection=b.dataset.adminSection;render();return;}if(b.dataset.adminRoster){if(state.role!=='admin')return;state.showFullRoster=!state.showFullRoster;render();return;}if(b.dataset.station){if(state.role!=='steward')return;state.stewardStation=b.dataset.station==='parking'?'parking':'gate';render();return;}if(b.dataset.stage!==undefined){if(state.role!=='steward'||state.stewardStation!=='parking')return;stageNext(Number(b.dataset.stage));render();return;}if(b.dataset.role){state.role=b.dataset.role;state.tab=state.role==='admin'?'admin':state.role==='steward'?'board':'dog';if(state.role==='admin'){state.adminSection='events';state.adminEventId=currentTrial().eventId;state.adminTrialChosen=true;state.contextOpen=false;}render();return;}if(b.dataset.tab){if(['admin','setup'].includes(b.dataset.tab)&&state.role!=='admin')return;state.tab=b.dataset.tab;if(state.tab==='admin')state.adminSection='overview';if(state.tab==='setup')state.adminSection='events';render();return;}if(b.dataset.jump&&state.role==='admin'){const [ti,di]=b.dataset.jump.split(':').map(Number);if(state.trials[ti]?.days[di]){state.trial=ti;state.day=di;switchDay();render();}return;}if(b.dataset.editTeam){if(state.role!=='admin')return;state.editTeam=b.dataset.editTeam;render();return;}if(b.dataset.cancelTeam){if(state.role!=='admin')return;state.editTeam=null;render();return;}if(b.dataset.setup){if(state.role!=='admin')return;setupAction(b.dataset.setup,Number(b.dataset.idx));return;}if(b.dataset.sms){receiveSMS(b.dataset.sms);render();return;}if(b.dataset.expand!==undefined){if(!['admin','steward'].includes(state.role))return;const i=Number(b.dataset.expand);state.showExtra[i]=!state.showExtra[i];render();return;}if(b.dataset.do){if(!['admin','steward'].includes(state.role))return;const i=Number(b.dataset.idx);if(state.role==='steward'&&(state.stewardStation!=='gate'||i!==state.gateRunIndex))return;const s=state.searches[i],action=b.dataset.do;if(!s||s.done)return;const id=action==='restore'?document.getElementById('restore-'+i)?.value:document.getElementById('extra-'+i)?.value;const anchor=document.getElementById('anchor-'+i)?.value;const skipCount=action==='skip'?document.getElementById('skip-count-'+i)?.value:1;dispatch(s,action,id,anchor,skipCount);render();return;}if(b.dataset.action==='hold'){if(state.role!=='admin')return;changeHold(true);render();return;}if(b.dataset.action==='resume'){if(state.role!=='admin')return;changeHold(false);render();return;}if(b.dataset.action==='fast'){if(!['admin','steward'].includes(state.role))return;const s=state.searches.find(s=>s.active);if(s)for(let i=0;i<3;i++)dispatch(s,'send');render();return;}if(b.dataset.action==='reset'){if(state.role!=='admin')return;if(!confirm('Reset queues, Done status, first staging, mock messages and weather hold for this selected day? Trial setup and roster will be kept.'))return;resetCurrentDay();render();}});
+render();
+</script>
+</body>
+</html>
